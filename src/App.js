@@ -1,14 +1,34 @@
-import React from 'react';
+import React, {Component} from 'react';
 import logo from './logo.svg';
-import Login from './Login'
+
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
+import LoginPage from './components/pages/LoginPage'
 import './App.scss';
 import 'admin-lte/dist/css/adminlte.css'
-function App() {
-  return (
-    <div className="App container-fluid px-0">
-      <Login />
-    </div>
-  );
+import axios from "axios"
+
+class App extends Component {
+
+  constructor(props){
+    super(props);
+
+    axios.defaults.withCredentials = true;
+
+  }
+  
+  render(){
+
+    return(
+      <Router>
+        <div className="App container px-0">
+          <Switch>
+          <Route path='/' exact component={LoginPage}/>
+          {/* <Route path='/test' component={TestComp}/> */}
+          </Switch>
+        </div>
+      </Router>
+    );
+  }
 }
 
 export default App;
