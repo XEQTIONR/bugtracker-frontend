@@ -4,9 +4,10 @@ import logo from './logo.svg';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 import LoginPage from './components/pages/LoginPage'
 import './App.scss';
-import 'admin-lte/dist/css/adminlte.css'
+// import 'admin-lte/dist/css/adminlte.css'
 import axios from "axios"
 
+import { ToastContainer, toast } from 'react-toastify';
 class App extends Component {
 
   constructor(props){
@@ -21,6 +22,7 @@ class App extends Component {
     return(
       <Router>
         <div className="App container-fluid" style={{backgroundColor : '#CCC'}}>
+          <ToastContainer />
           <Switch>
           <Route path='/' exact component={LoginPage}/>
           {/* <Route path='/test' component={TestComp}/> */}
