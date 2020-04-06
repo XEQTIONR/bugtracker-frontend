@@ -11,11 +11,12 @@ class LoginPage extends Component{
     
     return(
       // <div style={{marginTop: '20vh'}} className="row justify-content-center">
-      <div style={{height : '100vh'}}  className="d-flex flex-row justify-content-center align-items-center" >
-          <div style={{maxWidth : '700px'}} className="col-md-8 col-xl-5 mb-lg-5 ">
+      <div style={{height : '100vh'}}  className="d-flex flex-column justify-content-center   align-items-center" >
+          
+          <h2 className="mb-3">BugtrackR</h2>
+          <div style={{maxWidth : '500px'}} className="col-md-8 col-xl-5 ">
             <Login />
           </div>
-            
       </div>
     )
   }

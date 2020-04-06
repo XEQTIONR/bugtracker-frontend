@@ -34,7 +34,7 @@ class TextField extends Component {
     render() {
 
       let label =
-          <label className="col-md-4 col-form-label text-left text-md-right">
+          <label className="col-md-3 col-form-label text-left ">
             {this.props.label}
             </label> 
 
@@ -51,7 +51,7 @@ class TextField extends Component {
       return (
           <div className="form-group row justify-content-center">
                   { this.props.label != null ? label : ''}
-              <div className={ label_set ? "col-md-6" : "col-12"}>
+              <div className={ label_set ? "col-md-9" : "col-12"}>
                 <div className="input-group">
                   <input className="form-control" type={this.props.type !== undefined ? this.props.type : 'text'} onChange={this.handleChange} placeholder={this.props.placeholder}></input>
                       { this.props.inputGroupAppend != null ? input_group_append : ''}

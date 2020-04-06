@@ -11,7 +11,7 @@ class Login extends Component {
     constructor(props){
         super(props);
 
-        this.state = {email : '', password : ''};
+        this.state = {email : '', password : '', status: 'idle'};
 
         this.login = this.login.bind(this);
         this.emailChange = this.emailChange.bind(this);
@@ -26,6 +26,11 @@ class Login extends Component {
 
         let email = this.state.email;
         let password = this.state.password;
+
+        let me = this;
+
+        this.setState({'status': 'working'});
+
         axios.get('http://bugtracker.local/sanctum/csrf-cookie').then(response => {
             // Login...
             axios.post('http://bugtracker.local/login',
@@ -49,19 +54,25 @@ class Login extends Component {
                             )
                             .catch(error => {
                               console.log("MIDDLEWARE ERROR : " + error)
-                              console.log(error.toJSON())
+                              console.log(error.response)
                             
                             })
+
+                       
                             
                     }
+                    me.setState({'status': 'idle'});
                 })
                 .catch(function(error){
                     console.log("LOGIN CATCH");
-                    console.log( error.toJSON());
+                    console.log( error.response);
+
+                    me.setState({'status': 'idle'});
                 });
         }).catch(function(error){
             console.log("CSRF COOKIE catch");
-            console.log(error.toJSON())
+            console.log(error.response)
+            me.setState({'status': 'idle'});
         });
 
     }
@@ -79,21 +90,35 @@ class Login extends Component {
 
 
     render() {
+
+        let idle = <div className="card-body">
+        <div className="row justify-content-center mb-4">
+          <small><strong>Sign in to your account</strong></small>
+        </div>
+        <TextField change={this.emailChange} label="Email" placeholder="Your Email Address" type="email" inputGroup="Y"/>
+        <TextField change={this.passwordChange} label="Password" placeholder="Your Password" type="password"/>
+        <div className="form-group row">
+            <div className="col-md-3 offset-md-9 mt-1 mt-md-2 ">
+                <Button onClick={this.login} label="Sign In" buttonClasses="btn btn-primary btn-block" blockThreshold="768"/>
+            </div>
+        </div>
+    </div>
+    
+        let working =  
+        <div className="card-body">
+          <div className="row justify-content-center mb-4">
+            <small><strong>Signing in to your account</strong></small>
+          </div>
+        </div>
+      
         return (
 
           <div className="card">
-              <div className="card-header">
+              {/* <div className="card-header">
                   Login Component
-              </div>
-              <div className="card-body justify-content-center">
-                  <TextField change={this.emailChange} label="E-Mail Address" placeholder="Enter E-Mail Address" type="email" inputGroup="Y"/>
-                  <TextField change={this.passwordChange} label="Password" placeholder="Enter Password" type="password"/>
-                  <div className="form-group">
-                      <div className="col-md-8 offset-md-4 mt-4 px-0 px-md-2">
-                          <Button onClick={this.login} label="Login" buttonClasses="btn btn-primary " blockThreshold="768"/>
-                      </div>
-                  </div>
-              </div>
+              </div> */}
+              { this.state.status == 'working' ? working : idle }
+              
           </div>
         );
     }

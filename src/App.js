@@ -20,7 +20,7 @@ class App extends Component {
 
     return(
       <Router>
-        <div className="App container px-0">
+        <div className="App container-fluid" style={{backgroundColor : '#CCC'}}>
           <Switch>
           <Route path='/' exact component={LoginPage}/>
           {/* <Route path='/test' component={TestComp}/> */}
