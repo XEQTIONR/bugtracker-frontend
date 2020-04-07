@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Login from "../modules/Login";
-
+import Test from "../../TestComp";
+import {Link} from 'react-router-dom';
 class LoginPage extends Component{
 
   constructor(props){
@@ -15,7 +16,10 @@ class LoginPage extends Component{
           
           <h2 className="mb-3">BugtrackR</h2>
           <div style={{maxWidth : '500px'}} className="col-md-8 col-xl-5 ">
-            <Login />
+            <Login onLoginStateChange={this.props.loggedInStateChange}/>
+          </div>
+          <div style={{maxWidth : '500px'}} className="col-md-8 col-xl-5 ">
+            <Link to="/test">To test</Link>
           </div>
       </div>
     )

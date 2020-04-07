@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
+import {Redirect} from 'react-router-dom';
 import TextField from "../atomic/TextField";
 import Button from "../atomic/Button";
 import ToasterNotification from "./ToasterNotification";
 import axios from "axios";
+import { Route } from 'react-router-dom';
 
 
 class Login extends Component {
@@ -49,7 +51,8 @@ class Login extends Component {
                               console.log (" THEN RES :")
                               console.log (res)
                               ToasterNotification.success("Successfully logged in.");
-                          
+
+                              me.props.onLoginStateChange(true)
                               }
                             )
                             .catch(error => {
