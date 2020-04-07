@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import TextField from "../atomic/TextField";
 import Button from "../atomic/Button";
-
+import ToasterNotification from "./ToasterNotification";
 import axios from "axios";
 
 
@@ -21,9 +21,7 @@ class Login extends Component {
 
     login(e){
         e.preventDefault();
-        //console.log("login function");
-        //console.log("EMAIL : " + this.state.email + "  PASSWORD :" + this.state.password)
-
+     
         let email = this.state.email;
         let password = this.state.password;
 
@@ -50,6 +48,8 @@ class Login extends Component {
                             .then(res => {
                               console.log (" THEN RES :")
                               console.log (res)
+                              ToasterNotification.success("Successfully logged in.");
+                          
                               }
                             )
                             .catch(error => {
@@ -61,30 +61,46 @@ class Login extends Component {
                        
                             
                     }
+                    me.setState({password : ""});
                     me.setState({'status': 'idle'});
                 })
                 .catch(function(error){
                     console.log("LOGIN CATCH");
-                    console.log( error.response);
+                    //console.log( error.response.data.message);
+                    console.log("ERROR");
+                    console.log(error);
 
+                    if(error.response)
+                    {
+                      console.log("ERROR RESPONSE :")
+                      console.log(error.response)
+                      ToasterNotification.error(error.response.data.message);
+                    }
+                    else
+                    {
+                      //already logged in PROBABLY.
+                      console.log("no error response")
+                      ToasterNotification.error("No error response");
+                    }
+                      
+                    
+                    me.setState({password : ""});
                     me.setState({'status': 'idle'});
                 });
         }).catch(function(error){
             console.log("CSRF COOKIE catch");
-            console.log(error.response)
+            console.log(error.response.data.message)
             me.setState({'status': 'idle'});
         });
 
     }
 
-    emailChange(e){
-        e.preventDefault();
-        this.setState({email : e.target.value});
+    emailChange(value){
+        this.setState({email : value});
     }
 
-    passwordChange(e){
-        e.preventDefault();
-        this.setState({password : e.target.value});
+    passwordChange(value){
+        this.setState({password : value});
     }
 
 
@@ -95,8 +111,8 @@ class Login extends Component {
         <div className="row justify-content-center mb-4">
           <small><strong>Sign in to your account</strong></small>
         </div>
-        <TextField change={this.emailChange} label="Email" placeholder="Your Email Address" type="email" inputGroup="Y"/>
-        <TextField change={this.passwordChange} label="Password" placeholder="Your Password" type="password"/>
+        <TextField change={this.emailChange} val={this.state.email} label="Email" placeholder="Your Email Address" type="email" inputGroup="Y"/>
+        <TextField change={this.passwordChange} val={this.state.password} label="Password" placeholder="Your Password" type="password"/>
         <div className="form-group row">
             <div className="col-md-3 offset-md-9 mt-1 mt-md-2 ">
                 <Button onClick={this.login} label="Sign In" buttonClasses="btn btn-primary btn-block" blockThreshold="768"/>

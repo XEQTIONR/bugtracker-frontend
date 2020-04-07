@@ -21,15 +21,21 @@ class TextField extends Component {
 
     constructor(props){
         super(props);
-        //this.state = {placeholder : props.placeholder, label : "INITIAL"};
+        this.state = {val : props.val};
 
-        this.handleChange = props.change;
+        //this.handleChange = props.change;
+        this.handleChange = this.handleChange.bind(this);
     }
 
-    // handleChange(e){
-    //     e.preventDefault();
-    //     //this.setState({label : e.target.value});
-    // }
+    handleChange(e){
+        e.preventDefault();
+        
+        //set internal state
+        this.setState({val : e.target.value});
+        
+        //call to change callback
+        this.props.change(e.target.value);
+    }
 
     render() {
 
@@ -53,7 +59,10 @@ class TextField extends Component {
                   { this.props.label != null ? label : ''}
               <div className={ label_set ? "col-md-9" : "col-12"}>
                 <div className="input-group">
-                  <input className="form-control" type={this.props.type !== undefined ? this.props.type : 'text'} onChange={this.handleChange} placeholder={this.props.placeholder}></input>
+                  <input className="form-control" 
+                        type={this.props.type !== undefined ? this.props.type : 'text'} 
+                        value={this.state.val} onChange={ (event) => this.handleChange(event)} 
+                        placeholder={this.props.placeholder} />
                       { this.props.inputGroupAppend != null ? input_group_append : ''}
                   </div>
                 </div>

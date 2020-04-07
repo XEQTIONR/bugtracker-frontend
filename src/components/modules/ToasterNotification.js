@@ -42,7 +42,8 @@ class ToasterNotification extends Component{
     return {
       closeButton : this.defaultCloseButton(),
       hideProgressBar : true,
-      type : 'default'
+      type : 'default',
+      position : window.innerWidth > 650 ? 'top-right' : 'top-center'
     }
   }
 
