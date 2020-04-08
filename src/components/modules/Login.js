@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {useState} from 'react';
 import ReactDOM from 'react-dom';
 import {Redirect} from 'react-router-dom';
 import TextField from "../atomic/TextField";
@@ -8,28 +8,22 @@ import axios from "axios";
 import { Route } from 'react-router-dom';
 
 
-class Login extends Component {
-
-    constructor(props){
-        super(props);
-
-        this.state = {email : '', password : '', status: 'idle'};
-
-        this.login = this.login.bind(this);
-        this.emailChange = this.emailChange.bind(this);
-        this.passwordChange = this.passwordChange.bind(this);
-    }
+function Login() {
 
 
-    login(e){
+        const[email, setEmail] = useState('');
+        const[password, setPassword] = useState('');
+        const[status, setStatus] = useState('idle');
+
+
+    const login = (e) => {
         e.preventDefault();
      
-        let email = this.state.email;
-        let password = this.state.password;
 
         let me = this;
 
-        this.setState({'status': 'working'});
+
+        setStatus('working');
 
         axios.get('http://bugtracker.local/sanctum/csrf-cookie').then(response => {
             // Login...
@@ -64,8 +58,9 @@ class Login extends Component {
                        
                             
                     }
-                    me.setState({password : ""});
-                    me.setState({'status': 'idle'});
+
+                    setPassword('');
+                    setStatus('idle')
                 })
                 .catch(function(error){
                     console.log("LOGIN CATCH");
@@ -87,48 +82,40 @@ class Login extends Component {
                     }
                       
                     
-                    me.setState({password : ""});
-                    me.setState({'status': 'idle'});
+                    setPassword('');
+                    setStatus('idle');
                 });
         }).catch(function(error){
             console.log("CSRF COOKIE catch");
             console.log(error.response.data.message)
-            me.setState({'status': 'idle'});
+            setStatus('idle');
         });
 
     }
 
-    emailChange(value){
-        this.setState({email : value});
-    }
-
-    passwordChange(value){
-        this.setState({password : value});
-    }
 
 
-
-    render() {
-
-        let idle = <div className="card-body">
+      
+      let idle = <div className="card-body">
         <div className="row justify-content-center mb-4">
           <small><strong>Sign in to your account</strong></small>
         </div>
-        <TextField change={this.emailChange} val={this.state.email} label="Email" placeholder="Your Email Address" type="email" inputGroup="Y"/>
-        <TextField change={this.passwordChange} val={this.state.password} label="Password" placeholder="Your Password" type="password"/>
+        <TextField change={setEmail} val={email}  label="Email" placeholder="Your Email Address" type="email" inputGroup="Y"/>
+        <TextField change={setPassword} val={password} label="Password" placeholder="Your Password" type="password"/>
         <div className="form-group row">
             <div className="col-md-3 offset-md-9 mt-1 mt-md-2 ">
-                <Button onClick={this.login} label="Sign In" buttonClasses="btn btn-primary btn-block" blockThreshold="768"/>
+                <Button onClick={login} label="Sign In" buttonClasses="btn btn-primary btn-block" blockThreshold="768"/>
             </div>
         </div>
     </div>
     
-        let working =  
+    let working =  
         <div className="card-body">
           <div className="row justify-content-center mb-4">
             <small><strong>Signing in to your account</strong></small>
           </div>
         </div>
+      
       
         return (
 
@@ -136,11 +123,11 @@ class Login extends Component {
               {/* <div className="card-header">
                   Login Component
               </div> */}
-              { this.state.status == 'working' ? working : idle }
+              {/* { this.state.status == 'working' ? working : idle } */}
+              { status == 'working' ? working : idle }
               
           </div>
         );
-    }
 }
 
 export default Login;
