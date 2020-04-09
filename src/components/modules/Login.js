@@ -8,7 +8,7 @@ import axios from "axios";
 import { Route } from 'react-router-dom';
 
 import store from "../../store"
-import setAuthState  from "../../store/actions"
+import {setAuthState, setAuthFailedState }  from "../../store/actions"
 
 function Login() {
 
@@ -49,13 +49,14 @@ function Login() {
                               ToasterNotification.success("Successfully logged in.");
 
                               //me.props.onLoginStateChange(true)
-                              store.dispatch(setAuthState());
-
+                              store.dispatch(setAuthState({ email: res.data.email, name: res.data.name}));
+                              
                               }
                             )
                             .catch(error => {
                               console.log("MIDDLEWARE ERROR : " + error)
                               console.log(error.response)
+                              store.dispatch(setAuthFailedState({email}))
                             
                             })
 
@@ -74,8 +75,8 @@ function Login() {
 
                     // store.dispatch(setAuthState());
 
-                    console.log("STORE get state");
-                    console.log( store.getState()   )
+                    // console.log("STORE get state");
+                    // console.log( store.getState()   )
 
                     if(error.response)
                     {
@@ -89,7 +90,8 @@ function Login() {
                       console.log("no error response")
                       ToasterNotification.error("No error response");
                     }
-                      
+                    
+                    store.dispatch(setAuthFailedState({email}))
                     
                     setPassword('');
                     setStatus('idle');
@@ -97,6 +99,8 @@ function Login() {
         }).catch(function(error){
             console.log("CSRF COOKIE catch");
             console.log(error.response.data.message)
+
+            store.dispatch(setAuthFailedState({email}))
             setStatus('idle');
         });
 
