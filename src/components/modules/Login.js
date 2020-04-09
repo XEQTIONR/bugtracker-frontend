@@ -7,10 +7,12 @@ import ToasterNotification from "./ToasterNotification";
 import axios from "axios";
 import { Route } from 'react-router-dom';
 
+import store from "../../store"
+import {setAuthState}  from "../../store/actions"
 
 function Login() {
 
-
+        //local state
         const[email, setEmail] = useState('');
         const[password, setPassword] = useState('');
         const[status, setStatus] = useState('idle');
@@ -47,6 +49,8 @@ function Login() {
                               ToasterNotification.success("Successfully logged in.");
 
                               me.props.onLoginStateChange(true)
+                              store.dispatch(setAuthState);
+
                               }
                             )
                             .catch(error => {
@@ -67,6 +71,11 @@ function Login() {
                     //console.log( error.response.data.message);
                     console.log("ERROR");
                     console.log(error);
+
+                    store.dispatch({type : 'SET_AUTH_STATE'});
+
+                    //console.log("STORE get state");
+                    //console.log( store.getState()   );
 
                     if(error.response)
                     {
