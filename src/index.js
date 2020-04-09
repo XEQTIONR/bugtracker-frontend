@@ -15,14 +15,23 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import 'jquery/dist/jquery.min.js'
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 
-ReactDOM.render(
-  <React.StrictMode>
+let mainRender = () => {
+
+  ReactDOM.render(
+    <React.StrictMode>
     <Provider store={store}>
       <App />
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')
-);
+  );
+}
+
+store.subscribe(mainRender)
+
+mainRender()
+
+
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

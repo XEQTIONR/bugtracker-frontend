@@ -16,7 +16,7 @@ class LoginPage extends Component{
           
           <h2 className="mb-3">BugtrackR</h2>
           <div style={{maxWidth : '500px'}} className="col-md-8 col-xl-5 ">
-            <Login onLoginStateChange={this.props.loggedInStateChange}/>
+            <Login />
           </div>
           <div style={{maxWidth : '500px'}} className="col-md-8 col-xl-5 ">
             <Link to="/test">To test</Link>

@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {useState} from 'react';
 
 
 import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom'
@@ -9,6 +9,10 @@ import './App.scss';
 import axios from "axios"
 
 import { ToastContainer, toast } from 'react-toastify';
+
+
+import store from "./store"
+// import {setAuthState}  from "./store/actions"
 
 function PrivateRoute({ children, cond, ...rest }) {
   return (
@@ -30,37 +34,23 @@ function PrivateRoute({ children, cond, ...rest }) {
   );
 }
 
-class App extends Component {
-
-  constructor(props){
-    super(props);
+function App() {
 
     axios.defaults.withCredentials = true;
 
-    this.state = { logged_in : false, email : null }
-
-    this.updateAuthState = this.updateAuthState.bind(this)
-
-  }
-
-  updateAuthState(callback_state){
-    this.setState({ logged_in : callback_state });
-  }
-  
-  render(){
 
     return(
       <Router>
         <div className="App container-fluid" style={{backgroundColor : '#CCC'}}>
           <ToastContainer />
+          
           <Switch>
-          <Route path='/' exact > <LoginPage loggedInStateChange={this.updateAuthState} /> </Route>
-          <PrivateRoute path='/test' cond={this.state.logged_in}> <TestComp /></PrivateRoute>
+          <Route path='/' exact > <LoginPage /> </Route>
+          <PrivateRoute path='/test' cond={store.getState().authState}> <TestComp /></PrivateRoute>
           </Switch>
         </div>
       </Router>
     );
-  }
 }
 
 export default App;

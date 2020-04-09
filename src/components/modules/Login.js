@@ -8,7 +8,7 @@ import axios from "axios";
 import { Route } from 'react-router-dom';
 
 import store from "../../store"
-import {setAuthState}  from "../../store/actions"
+import setAuthState  from "../../store/actions"
 
 function Login() {
 
@@ -48,8 +48,8 @@ function Login() {
                               console.log (res)
                               ToasterNotification.success("Successfully logged in.");
 
-                              me.props.onLoginStateChange(true)
-                              store.dispatch(setAuthState);
+                              //me.props.onLoginStateChange(true)
+                              store.dispatch(setAuthState());
 
                               }
                             )
@@ -72,10 +72,10 @@ function Login() {
                     console.log("ERROR");
                     console.log(error);
 
-                    store.dispatch({type : 'SET_AUTH_STATE'});
+                    // store.dispatch(setAuthState());
 
-                    //console.log("STORE get state");
-                    //console.log( store.getState()   );
+                    console.log("STORE get state");
+                    console.log( store.getState()   )
 
                     if(error.response)
                     {

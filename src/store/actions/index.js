@@ -3,3 +3,5 @@ const setAuthState = () =>{
     type : 'SET_AUTH_STATE'
   }
 }
+
+export default setAuthState
