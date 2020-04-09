@@ -128,6 +128,14 @@ function Login() {
             <small><strong>Signing in to your account</strong></small>
           </div>
         </div>
+
+
+    let alreadyLoggedIn =  
+    <div className="card-body">
+      <div className="row justify-content-center mb-4">
+        <small><strong>Already Logged In</strong></small>
+      </div>
+    </div>
       
       
         return (
@@ -137,7 +145,8 @@ function Login() {
                   Login Component
               </div> */}
               {/* { this.state.status == 'working' ? working : idle } */}
-              { status == 'working' ? working : idle }
+
+              { store.getState().authState ? alreadyLoggedIn : (status == 'working' ? working : idle) }
               
           </div>
         );
