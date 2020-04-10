@@ -24,7 +24,7 @@ function PrivateRoute({ children, cond, ...rest }) {
         ) : (
           <Redirect
             to={{
-              pathname: "/",
+              pathname: "/login",
               state: { from: location }
             }}
           />
@@ -45,8 +45,9 @@ function App() {
           <ToastContainer />
           
           <Switch>
-          <Route path='/' exact > <LoginPage /> </Route>
-          <PrivateRoute path='/test' cond={store.getState().authState}> <TestComp /></PrivateRoute>
+          <Route path='/' exact > <TestComp title="/  route (home)" /> </Route>
+          <Route path='/login' exact > <LoginPage /> </Route>
+          <PrivateRoute path='/test' cond={store.getState().authState}> <TestComp title="/test route" /></PrivateRoute>
           </Switch>
         </div>
       </Router>

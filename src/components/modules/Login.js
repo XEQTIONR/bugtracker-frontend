@@ -153,5 +153,3 @@ function Login() {
 }
 
 export default Login;
-
-ReactDOM.render(<Login />, document.getElementById('root'));
