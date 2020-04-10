@@ -21,8 +21,17 @@ const setAuthCachedState = (params) =>
   }
 }
 
+const setLogoutState = (param) =>{
+  
+  return {
+    type : 'SET_LOGOUT_STATE',
+  
+  }
+}
+
 module.exports = {
   setAuthState,
   setAuthFailedState,
-  setAuthCachedState
+  setAuthCachedState,
+  setLogoutState
 }

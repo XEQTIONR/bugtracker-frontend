@@ -8,7 +8,7 @@ import axios from "axios";
 import { Route } from 'react-router-dom';
 
 import store from "../../store"
-import {setAuthState, setAuthFailedState }  from "../../store/actions"
+import {setAuthState, setAuthFailedState}  from "../../store/actions"
 
 function Login() {
 
