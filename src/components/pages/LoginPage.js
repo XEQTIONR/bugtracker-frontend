@@ -19,7 +19,7 @@ function LoginPage(){
 
   let strr = store.getState()
 
-  console.log(strr.authState)
+  console.log(strr.AuthReducer.authState)
  
   //console.log(location)
 
@@ -32,7 +32,7 @@ function LoginPage(){
   console.log(from)
 
 
-  if( strr.authState && from.pathname!="/")
+  if( strr.AuthReducer.authState && from.pathname!="/")
   {
     history.replace(from);
     return(

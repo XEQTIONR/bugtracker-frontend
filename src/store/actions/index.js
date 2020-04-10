@@ -13,7 +13,16 @@ const setAuthFailedState = (params) => {
   }
 }
 
+const setAuthCachedState = (params) =>
+{
+  return {
+    type : 'SET_AUTH_CACHED_STATE',
+    payload : params
+  }
+}
+
 module.exports = {
   setAuthState,
-  setAuthFailedState
+  setAuthFailedState,
+  setAuthCachedState
 }

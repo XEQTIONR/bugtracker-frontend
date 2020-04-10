@@ -146,7 +146,7 @@ function Login() {
               </div> */}
               {/* { this.state.status == 'working' ? working : idle } */}
 
-              { store.getState().authState ? alreadyLoggedIn : (status == 'working' ? working : idle) }
+              { store.getState().AuthReducer.authState ? alreadyLoggedIn : (status == 'working' ? working : idle) }
               
           </div>
         );

@@ -38,6 +38,7 @@ function App() {
 
     axios.defaults.withCredentials = true;
 
+    const authState = store.getState().AuthReducer.authState
 
     return(
       <Router>
@@ -47,7 +48,7 @@ function App() {
           <Switch>
           <Route path='/' exact > <TestComp title="/  route (home)" /> </Route>
           <Route path='/login' exact > <LoginPage /> </Route>
-          <PrivateRoute path='/test' cond={store.getState().authState}> <TestComp title="/test route" /></PrivateRoute>
+          <PrivateRoute path='/test' cond={authState}> <TestComp title="/test route" /></PrivateRoute>
           </Switch>
         </div>
       </Router>

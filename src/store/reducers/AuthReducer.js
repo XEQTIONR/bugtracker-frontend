@@ -2,6 +2,9 @@ const AuthReducer = (state, action) => {
 
   switch(action.type){
 
+    case 'SET_AUTH_CACHED_STATE' :
+      return action.payload;
+
     case 'SET_AUTH_STATE' :
       return {authState : true, email : action.payload.email, authStatus: 'authenticated'};
 
@@ -11,7 +14,7 @@ const AuthReducer = (state, action) => {
 
     case 'SET_LOGOUT_STATE' :
 
-    default :
+     default :
       return {authState : false , email: '', authStatus : 'unauthenticated'};
   }
 
