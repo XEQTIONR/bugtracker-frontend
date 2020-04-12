@@ -5,7 +5,7 @@ import Login from "../modules/Login";
 function UserHomePage(props) {
 
     return (
-      <div className="pt-5" style={{minHeight: '100vh', transition: '.5s' ,marginLeft: props.sidebarState ? '250px' : '50px'}}>
+      <div className="pt-5" style={{minHeight: '100vh', transition: '.5s' ,marginLeft: props.sidebarState ? '300px' : '75px'}}>
       {/* <Nav />   */}
       <div className="row mx-0">
         <div className="col-12">
@@ -36,6 +36,30 @@ Adaptogen truffaut post-ironic narwhal typewriter, mustache YOLO 3 wolf moon goc
 Dummy text? More like dummy thicc text, amirite?
 
 </p>
+
+
+        </div>
+        <div className="col-md-4">
+        <div className="info-box bg-success">
+              <span className="info-box-icon"><i className="far fa-bookmark"></i></span>
+
+              <div class="info-box-content">
+                <span className="info-box-text text-left">Bookmarks</span>
+                <span className="info-box-number text-left">41,410</span>
+
+                <div className="progress">
+                  <div className="progress-bar" style={{width: "70%"}}></div>
+                </div>
+                <span className="progress-description text-left">
+                  70% Increase in 30 Days
+                </span>
+              </div>
+              
+</div>
+        </div>
+        <div className="col-md-8">
+
+        <button className="btn btn-primary ">SOME BUTTON</button>
         </div>
       </div>
       </div>

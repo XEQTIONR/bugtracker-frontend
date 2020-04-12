@@ -5,7 +5,7 @@ import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom
 import LoginPage from './components/pages/LoginPage'
 import UserHomePage from './components/pages/UserHomePage'
 import Nav from './components/Nav'
-import MainSidebar from './components/MainSidebar'
+import Sidebar from './components/Sidebar'
 import TestComp from './TestComp'
 
 import './App.scss';
@@ -47,12 +47,12 @@ function App() {
 
     return(
       <Router>
-        <div className="App container-fluid p-0" style={{backgroundColor : '#CCC'}}>
+        <div className="App container-fluid p-0" >
           <ToastContainer />
           
           <Switch>
           <Route path='/' exact > <TestComp title="/  route (home)" /> </Route>
-          <Route path='/home' exact > <MainSidebar cb={setSidebarState} /><Nav sidebarState={sidebarState} /> <UserHomePage sidebarState={sidebarState} /> </Route>
+          <Route path='/home' exact > <Sidebar cb={setSidebarState} /> <UserHomePage  /> </Route>
           <Route path='/login' exact > <LoginPage /> </Route>
           <PrivateRoute path='/test' cond={authState}> <TestComp title="/test route" /></PrivateRoute>
           </Switch>

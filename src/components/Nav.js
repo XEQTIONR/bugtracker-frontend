@@ -6,7 +6,7 @@ function Nav(){
 
   return ( 
     
-    <nav className="navbar navbar-expand-md navbar-dark bg-dark fixed-top py-3 ">
+    <nav className="navbar navbar-expand-md navbar-dark bg-dark fixed-top  mt-2 pt-1 pb-2 ">
       <div className="col-md-3 col-xl-4 px-0 px-md-auto">
 
       <a className="navbar-brand text-primary float-md-left" style={{marginLeft : "73px"}}>Bugfixer</a>

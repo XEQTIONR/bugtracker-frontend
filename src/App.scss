@@ -3,8 +3,8 @@
 @import "./sass/brand.scss";
 
 
-$success : $primary-red;
-$primary : #25C29F;
+//
+$primary : $primary-purple;
 // $font-family-base : Lato, Montserrat, sans-serif;
 // $font-weight-normal: 600;
 
@@ -22,7 +22,7 @@ $primary : #25C29F;
  
 .sidebar-wrapper{
   height: 100%;
-  width: 250px;
+  width: 275px;
   position: fixed;
   top: 0;
   // left: -250px;
@@ -49,15 +49,15 @@ $primary : #25C29F;
 }
 
 .App-logo {
-  height: 40vmin;
+  //height: 40vmin;
   pointer-events: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
+// @media (prefers-reduced-motion: no-preference) {
+//   .App-logo {
+//     animation: App-logo-spin infinite 20s linear;
+//   }
+// }
 
 .App-header {
   background-color: #282c34;
