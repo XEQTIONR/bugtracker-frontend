@@ -3,6 +3,7 @@ import React, {useState} from 'react';
 
 import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom'
 import LoginPage from './components/pages/LoginPage'
+import UserHomePage from './components/pages/UserHomePage'
 import TestComp from './TestComp'
 import './App.scss';
 // import 'admin-lte/dist/css/adminlte.css'
@@ -42,11 +43,12 @@ function App() {
 
     return(
       <Router>
-        <div className="App container-fluid" style={{backgroundColor : '#CCC'}}>
+        <div className="App container-fluid p-0" style={{backgroundColor : '#CCC'}}>
           <ToastContainer />
           
           <Switch>
           <Route path='/' exact > <TestComp title="/  route (home)" /> </Route>
+          <Route path='/home' exact > <UserHomePage /> </Route>
           <Route path='/login' exact > <LoginPage /> </Route>
           <PrivateRoute path='/test' cond={authState}> <TestComp title="/test route" /></PrivateRoute>
           </Switch>
