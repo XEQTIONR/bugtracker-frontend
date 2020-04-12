@@ -4,7 +4,10 @@ import React, {useState} from 'react';
 import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom'
 import LoginPage from './components/pages/LoginPage'
 import UserHomePage from './components/pages/UserHomePage'
+import Nav from './components/Nav'
+import MainSidebar from './components/MainSidebar'
 import TestComp from './TestComp'
+
 import './App.scss';
 // import 'admin-lte/dist/css/adminlte.css'
 import axios from "axios"
@@ -40,6 +43,7 @@ function App() {
     axios.defaults.withCredentials = true;
 
     const authState = store.getState().AuthReducer.authState
+    const [sidebarState, setSidebarState] = useState(false)
 
     return(
       <Router>
@@ -48,7 +52,7 @@ function App() {
           
           <Switch>
           <Route path='/' exact > <TestComp title="/  route (home)" /> </Route>
-          <Route path='/home' exact > <UserHomePage /> </Route>
+          <Route path='/home' exact > <MainSidebar cb={setSidebarState} /><Nav sidebarState={sidebarState} /> <UserHomePage sidebarState={sidebarState} /> </Route>
           <Route path='/login' exact > <LoginPage /> </Route>
           <PrivateRoute path='/test' cond={authState}> <TestComp title="/test route" /></PrivateRoute>
           </Switch>

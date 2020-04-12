@@ -6,10 +6,10 @@ function Nav(){
 
   return ( 
     
-    <nav className="navbar navbar-expand-md navbar-dark bg-dark  ">
+    <nav className="navbar navbar-expand-md navbar-dark bg-dark fixed-top py-3 ">
       <div className="col-md-3 col-xl-4 px-0 px-md-auto">
 
-      <a className="navbar-brand text-primary ml-5 float-md-left" href="#">Bugfixer</a>
+      <a className="navbar-brand text-primary float-md-left" style={{marginLeft : "73px"}}>Bugfixer</a>
       <button style={{float: "right"}} className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
       </button>
