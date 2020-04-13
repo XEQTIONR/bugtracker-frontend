@@ -44,6 +44,8 @@ function App() {
     const authState = store.getState().AuthReducer.authState
     const [sidebarState, setSidebarState] = useState(false)
 
+    const sidebarTransitionSpeed = "0.5s"
+
     return(
       <Router>
         <div className="App container-fluid p-0" >
@@ -51,7 +53,10 @@ function App() {
           
           <Switch>
           <Route path='/' exact > <TestComp title="/  route (home)" /> </Route>
-          <Route path='/home' exact > <Sidebar cb={setSidebarState} /> <UserHomePage  /> </Route>
+          <Route path='/home' exact > 
+                  <Sidebar speed={sidebarTransitionSpeed} cb={setSidebarState} /> 
+                  <Nav speed={sidebarTransitionSpeed} sidebarState={sidebarState} /> 
+                  <UserHomePage speed={sidebarTransitionSpeed} sidebarState={sidebarState}  /> </Route>
           <Route path='/login' exact > <LoginPage /> </Route>
           <PrivateRoute path='/test' cond={authState}> <TestComp title="/test route" /></PrivateRoute>
           </Switch>

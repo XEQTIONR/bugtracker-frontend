@@ -1,17 +1,19 @@
 import React, {useState} from 'react'
-import SidebarItem from './SidebarItem'
 import logo from '../logo.svg';
+import SidebarItem from './atomic/SidebarItem'
+import SidebarDivider from './atomic/SidebarDivider'
+import SidebarSection from './SidebarSection'
 
 function Sidebar(props){
   
-  const LEFT = "-210px" 
+  const LEFT = "105px" 
 
   const [sidebarCSS, setSidebarCSS] = useState({
-    left: LEFT,
+    width: LEFT,
   })
 
   const [overlayCSS, setOverlayCSS] = useState({
-    left: LEFT,
+    display: "none",
   })
 
   const [myState, setMyState] = useState({
@@ -26,14 +28,16 @@ function Sidebar(props){
   }
 
   const openSidebar = () =>{
-      setSidebarCSS({ left: "0px" })
+      setSidebarCSS({ width: "225px" , transition: "width " +
+                                        props.speed!=undefined? props.speed : " 2s"})
       setOverlayCSS({ display: "inline" })
       setMyState({open : true})
       notify(true) // myState.open does not update in time
   }
 
   const closeSidebar = () =>{
-    setSidebarCSS({ left:LEFT  })
+    setSidebarCSS({ width: LEFT , transition: "width " +
+                                        props.speed!=undefined? props.speed : " 2s"})
       setOverlayCSS({ display: "none" })
       setMyState({open : false})
       notify(false) // myState.open does not update in time
@@ -55,27 +59,36 @@ const toggleSidebar = () =>{
 return(
   
   <React.Fragment>
-  <div className="sidebar-wrapper" style={sidebarCSS} >
+  <div className="sidebar-wrapper px-3" style={sidebarCSS} >
 
-    <div className="logo w-100 mt-4" onClick={toggleSidebar}>
-        <img src={logo} className="App-logo d-block ml-auto" alt="logo"
+    <div className="logo w-100 py-3" onClick={toggleSidebar} >
+        <img src={logo} className="App-logo d-block mx-auto" alt="logo"
         
         style={{height : "40px",
-        transition : "margin .5s",
-        marginRight : myState.open ? "40%" : "8px",
+        transition : "margin "+ props.speed==undefined ? ".1s" : props.speed,
+        // marginRight : myState.open ? "40%" : "25px",
       
       }} 
         />
     </div>
-    {/* <div className="w-100 m-0 d-flex justify-content-start align-items-center" style={{height: "74px"}}> */}
-      {/* <h4 className="text-light ml-4">Main Options</h4> */}
-    {/* </div> */}
-    <ul className="list-group" style={{display : sidebarCSS.left == LEFT ? "none" : "inherit"}}>
-      <SidebarItem title="Item 1" />
-      <SidebarItem title="Item 2" />
-      <SidebarItem title="Item 3" />
-    </ul>
+    
+    <SidebarDivider open={myState.open} />
+    
+    <SidebarSection title="ze title" open={myState.open}>
+      <SidebarItem title="Components" icon="fas fa-cog" open={myState.open} />
+      <SidebarItem title="Utilities" icon="fas fa-cog" open={myState.open} />
+      <SidebarItem title="Pages" open={myState.open} />
+    </SidebarSection>
+
+    <SidebarSection title="ze title" open={myState.open}>
+      <SidebarItem title="Components" icon="fas fa-cog" open={myState.open} />
+      <SidebarItem title="Utilities" icon="fas fa-cog" open={myState.open} />
+      <SidebarItem title="Pages" icon="fas fa-cog" open={myState.open} />
+    </SidebarSection>
+
   </div>
+
+
   <div className="sidebar-overlay" style={overlayCSS} onClick={closeSidebar}></div>
   </React.Fragment>
 

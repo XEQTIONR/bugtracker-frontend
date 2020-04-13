@@ -2,18 +2,27 @@ import React from 'react'
 
 
 
-function Nav(){
+function Nav(props){
 
   return ( 
     
-    <nav className="navbar navbar-expand-md navbar-dark bg-dark fixed-top  mt-2 pt-1 pb-2 ">
-      <div className="col-md-3 col-xl-4 px-0 px-md-auto">
+    <nav className="navbar navbar-expand-md navbar-dark bg-dark fixed-top pt-1 pb-2 "
+      style={{
+        marginLeft: props.sidebarState ? '225px' : '105px',
+        transition : props.speed!=undefined ? props.speed : '4.0s'
+      }}
+    >
+      <div className="col-10 col-sm-11  col-md-3 col-xl-4 px-0 px-md-auto">
 
-      <a className="navbar-brand text-primary float-md-left" style={{marginLeft : "73px"}}>Bugfixer</a>
-      <button style={{float: "right"}} className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span className="navbar-toggler-icon"></span>
-      </button>
+      <a className="navbar-brand text-primary" >Bugfixer</a>
       </div>
+
+      <div className="col-2 col-sm-1 d-md-none">
+        <button style={{float: "right"}} className="navbar-toggler my-2-5"  type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span className="navbar-toggler-icon"></span>
+        </button>
+      </div>
+
       <div className="col-md-9 col-xl-8">
         
       

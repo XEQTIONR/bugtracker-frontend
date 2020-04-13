@@ -1,12 +1,13 @@
 import React  from 'react';
 import Login from "../modules/Login";
-// import Nav from "../Nav";
+import Nav from "../Nav";
 
 function UserHomePage(props) {
 
     return (
-      <div className="pt-5" style={{minHeight: '100vh', transition: '.5s' ,marginLeft: props.sidebarState ? '300px' : '75px'}}>
-      {/* <Nav />   */}
+      <div className="pt-5" style={{minHeight: '150vh', 
+      transition: props.speed , marginLeft: props.sidebarState ? '223px' : '100px'}}>
+      
       <div className="row mx-0">
         <div className="col-12">
             <h6>something</h6>
@@ -40,26 +41,30 @@ Dummy text? More like dummy thicc text, amirite?
 
         </div>
         <div className="col-md-4">
-        <div className="info-box bg-success">
-              <span className="info-box-icon"><i className="far fa-bookmark"></i></span>
+        <div className="small-box bg-info">
+              <div className="inner">
+                <h3 className="text-left">150</h3>
 
-              <div class="info-box-content">
-                <span className="info-box-text text-left">Bookmarks</span>
-                <span className="info-box-number text-left">41,410</span>
-
-                <div className="progress">
-                  <div className="progress-bar" style={{width: "70%"}}></div>
-                </div>
-                <span className="progress-description text-left">
-                  70% Increase in 30 Days
-                </span>
+                <p className="text-left">New Orders</p>
               </div>
-              
-</div>
+              <div className="icon">
+                <i className="far fa-bookmark"></i>
+              </div>
+              <a href="#" className="small-box-footer">More info <i className="fas fa-arrow-circle-right"></i></a>
+            </div>
         </div>
         <div className="col-md-8">
 
         <button className="btn btn-primary ">SOME BUTTON</button>
+
+        
+        <div className="callout callout-danger">
+          <h5>SOME CALLOUT</h5>
+          
+          <p>Some text</p>
+        </div>
+        
+        
         </div>
       </div>
       </div>
