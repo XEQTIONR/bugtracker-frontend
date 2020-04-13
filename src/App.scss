@@ -1,10 +1,13 @@
 @import "./ToastifyCustom.scss";
 @import "./css/fontastic.css";
 @import "./sass/brand.scss";
-
+@import "../node_modules/@fortawesome/fontawesome-free/css/all.css";
 
 //
+
+@import "admin-lte/dist/css/adminlte";
 $primary : $primary-purple;
+$success : $primary-purple;
 // $font-family-base : Lato, Montserrat, sans-serif;
 // $font-weight-normal: 600;
 

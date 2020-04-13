@@ -9,7 +9,6 @@ import Sidebar from './components/Sidebar'
 import TestComp from './TestComp'
 
 import './App.scss';
-// import 'admin-lte/dist/css/adminlte.css'
 import axios from "axios"
 
 import { ToastContainer, toast } from 'react-toastify';
