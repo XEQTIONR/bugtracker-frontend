@@ -17,7 +17,7 @@ import store from './store'
 
 
 import 'jquery/dist/jquery.min.js'
-//import 'bootstrap/dist/js/bootstrap.bundle.min.js'
+import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 
 let mainRender = () => {
 
