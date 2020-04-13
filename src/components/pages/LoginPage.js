@@ -50,9 +50,6 @@ function LoginPage(){
           <div style={{maxWidth : '500px'}} className="col-md-8 col-xl-5 ">
             <Login />
           </div>
-          <div style={{maxWidth : '500px'}} className="col-md-8 col-xl-5 ">
-            <Link to="/test">To test</Link>
-          </div>
       </div>
     )
   // }
