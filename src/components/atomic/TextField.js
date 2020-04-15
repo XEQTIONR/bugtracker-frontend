@@ -56,7 +56,7 @@ class TextField extends Component {
         
       return (
           <div className="form-group row justify-content-center">
-                  { this.props.label != null ? label : ''}
+                  { label_set ? label : ''}
               <div className={ label_set ? "col-md-9" : "col-12"}>
                 <div className="input-group">
                   <input className="form-control" 
