@@ -17,11 +17,34 @@ $primary : $primary-purple;
 @import "bootstrap/scss/bootstrap";
 
 
+.select-field-background{
+  width : 100%;
+  height : 100%;
+  position : fixed;
+  top: 0;
+  left: 0;
+  z-index : 1;
+  background-color :  rgba(0,0,0,0.1); 
+}
 
+.select-field{
+  z-index: 5 !important;
+}
+
+.select-field-list{
+  position: relative;
+  z-index: 6 !important;
+  //max-height: 4rem;
+  //overflow-y:  default;
+}
 .my-2-5{
   margin-top : .75rem;
   margin-bottom : .75rem;
 }
+
+// .pl-2-5{
+//   padding-left: .75rem;
+// }
 .text-white{
   color : #FFF;
 }
