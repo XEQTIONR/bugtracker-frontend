@@ -21,7 +21,7 @@ $primary : $primary-purple;
   width : 100vw;
   height : 100vh;
   position : fixed;
-  z-index : 1050;
+  z-index : 1051;
   background-color :  rgba(0,0,0,.85); 
 }
 
@@ -31,17 +31,17 @@ $primary : $primary-purple;
   position : fixed;
   top: 0;
   left: 0;
-  z-index : 1;
+  z-index : 1052;
   background-color :  rgba(0,0,0,0.1); 
 }
 
 .select-field{
-  z-index: 5 !important;
+  z-index: 1053 !important;
 }
 
 .select-field-list{
   position: relative;
-  z-index: 6 !important;
+  z-index: 1054 !important;
   //max-height: 4rem;
   //overflow-y:  default;
 }
