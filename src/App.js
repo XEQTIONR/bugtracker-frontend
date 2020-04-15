@@ -8,6 +8,8 @@ import TasksPage from './components/pages/TasksPage'
 import Nav from './components/Nav'
 import Sidebar from './components/Sidebar'
 import TestComp from './TestComp'
+import NewIssue from './components/modals/NewIssue'
+
 
 import './App.scss';
 import axios from "axios"
@@ -44,6 +46,10 @@ function App() {
 
     const authState = store.getState().AuthReducer.authState
     const [sidebarState, setSidebarState] = useState(false)
+    const [showModal, setShowModal] = useState(true);
+
+    const modal = showModal ? <NewIssue /> : "";
+
 
     const sidebarTransitionSpeed = "0.5s"
 
@@ -52,6 +58,8 @@ function App() {
         <div className="App container-fluid p-0" >
           <ToastContainer />
           
+          {showModal ? <NewIssue /> : ""}
+
           <Switch>
           <Route path='/' exact > <TestComp title="/  route (home)" /> </Route>
           <Route path='/home' exact > 
