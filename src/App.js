@@ -46,7 +46,7 @@ function App() {
 
     const authState = store.getState().AuthReducer.authState
     const [sidebarState, setSidebarState] = useState(false)
-    const [showModal, setShowModal] = useState(true);
+    const [showModal, setShowModal] = useState(false);
 
     const modal = showModal ? <NewIssue /> : "";
 
