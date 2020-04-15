@@ -9,10 +9,10 @@ function TasksPage(props){
 
     <Page speed={props.speed} sidebarState={props.sidebarState}>
 
-        <div className="row mx-2 mt-4">
+        <div className="row mx-2 mt-3 mb-3">
           <div className="col-12">
-            <h1 className="ml-1">Tasks Page</h1>
-            <h5 className="ml-1 text-muted">Your Tasks</h5>
+            {/* <h2 className="ml-1">Tasks Page</h2> */}
+            <h4 className="ml-1 text-muted">Your Tasks</h4>
           </div>
         </div>
         <div className="row mx-2">
@@ -24,11 +24,14 @@ function TasksPage(props){
                       <input type="text" name="table_search" className="form-control float-right" placeholder="Search" />
 
                       <div className="input-group-append">
-                        <button type="submit" className="btn btn-primary"><i className="fas fa-search"></i></button>
+                        <button type="button" className="btn btn-primary"><i className="fas fa-search"></i></button>
                       </div>
                       <div className="input-group-append">
-                        <button type="submit" className="btn btn-secondary"><i className="fa fa-filter"></i></button>
-                </div>
+                        <button type="button" className="btn btn-secondary"><i className="fa fa-filter"></i></button>
+                      </div>
+                      <div className="input-group-append">
+                        <button type="button" className="btn btn-success" onClick={() => { if(props.modalCb!=undefined) props.modalCb(true)}}><i className="fa fa-plus"></i></button>
+                      </div>
               </div>
               </div>
 

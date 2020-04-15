@@ -58,7 +58,7 @@ function App() {
         <div className="App container-fluid p-0" >
           <ToastContainer />
           
-          {showModal ? <NewIssue /> : ""}
+          {showModal ? <NewIssue dismissCb={setShowModal} /> : ""}
 
           <Switch>
           <Route path='/' exact > <TestComp title="/  route (home)" /> </Route>
@@ -70,7 +70,7 @@ function App() {
           <Route path='/login' exact > <LoginPage /> </Route>
           <Route path='/tasks' exact > 
                   <Sidebar speed={sidebarTransitionSpeed} cb={setSidebarState} />
-                  <TasksPage speed={sidebarTransitionSpeed} sidebarState={sidebarState} /> 
+                  <TasksPage speed={sidebarTransitionSpeed} sidebarState={sidebarState} modalCb={setShowModal} /> 
           </Route>
 
           <PrivateRoute path='/test' cond={authState}> <TestComp title="/test route" /></PrivateRoute>

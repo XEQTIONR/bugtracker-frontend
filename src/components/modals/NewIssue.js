@@ -2,12 +2,14 @@ import React from 'react'
 import TextField from '../atomic/TextField'
 import Button from '../atomic/Button'
 import SelectField from '../atomic/SelectField'
-function NewIssue(){
+function NewIssue(props){
 
 
   return (
 
-      <div className="modal-background d-flex justify-content-center align-items-center">
+      <div className="modal-background d-flex justify-content-center align-items-center"
+      onClick={()=>props.dismissCb(false)}
+      >
         {/* <div> */}
           <form className="card bg-gray-100 w-50" onClick={(e)=>{ e.stopPropagation(); console.log("FORM CLICKED")}}>
             <div className="card-body">
