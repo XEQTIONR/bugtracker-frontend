@@ -13,6 +13,9 @@ $primary : $primary-purple;
 // $font-family-base : Lato, Montserrat, sans-serif;
 // $font-weight-normal: 600;
 
+.list-group-item{
+  border-top-width : 1px !important;
+}
 
 @import "bootstrap/scss/bootstrap";
 
