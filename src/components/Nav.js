@@ -6,7 +6,7 @@ function Nav(props){
 
   return ( 
     
-    <nav className="navbar navbar-expand-md navbar-dark bg-dark fixed-top pt-1 pb-2 "
+    <nav className="navbar navbar-expand-md navbar-light bg-white fixed-top pt-1 pb-2 "
       style={{
         marginLeft: props.sidebarState ? '225px' : '105px',
         transition : props.speed!=undefined ? props.speed : '4.0s'

@@ -75,15 +75,9 @@ return(
     <SidebarDivider open={myState.open} />
     
     <SidebarSection title="ze title" open={myState.open}>
-      <SidebarItem title="Components" icon="fas fa-cog" open={myState.open} />
-      <SidebarItem title="Utilities" icon="fas fa-cog" open={myState.open} />
-      <SidebarItem title="Pages" open={myState.open} />
-    </SidebarSection>
-
-    <SidebarSection title="ze title" open={myState.open}>
-      <SidebarItem title="Components" icon="fas fa-cog" open={myState.open} />
-      <SidebarItem title="Utilities" icon="fas fa-cog" open={myState.open} />
-      <SidebarItem title="Pages" icon="fas fa-cog" open={myState.open} />
+      <SidebarItem title="Components" to="/" icon="fas fa-home" open={myState.open} />
+      <SidebarItem title="Tasks" to="/tasks"  icon="fas fa-clipboard-list" open={myState.open} />
+      <SidebarItem title="Mission Control"  to="/home" icon="fas fa-rocket"  open={myState.open} />
     </SidebarSection>
 
   </div>

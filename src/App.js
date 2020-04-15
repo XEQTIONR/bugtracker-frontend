@@ -4,6 +4,7 @@ import React, {useState} from 'react';
 import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom'
 import LoginPage from './components/pages/LoginPage'
 import UserHomePage from './components/pages/UserHomePage'
+import TasksPage from './components/pages/TasksPage'
 import Nav from './components/Nav'
 import Sidebar from './components/Sidebar'
 import TestComp from './TestComp'
@@ -56,8 +57,14 @@ function App() {
           <Route path='/home' exact > 
                   <Sidebar speed={sidebarTransitionSpeed} cb={setSidebarState} /> 
                   <Nav speed={sidebarTransitionSpeed} sidebarState={sidebarState} /> 
-                  <UserHomePage speed={sidebarTransitionSpeed} sidebarState={sidebarState}  /> </Route>
+                  <UserHomePage speed={sidebarTransitionSpeed} sidebarState={sidebarState}  navbar={true}/> 
+          </Route>
           <Route path='/login' exact > <LoginPage /> </Route>
+          <Route path='/tasks' exact > 
+                  <Sidebar speed={sidebarTransitionSpeed} cb={setSidebarState} />
+                  <TasksPage speed={sidebarTransitionSpeed} sidebarState={sidebarState} /> 
+          </Route>
+
           <PrivateRoute path='/test' cond={authState}> <TestComp title="/test route" /></PrivateRoute>
           </Switch>
         </div>
