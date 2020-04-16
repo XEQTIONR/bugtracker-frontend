@@ -73,6 +73,11 @@ class SelectField extends React.Component{
         console.log("Escape")
         if(this.state.open)
           this.setState({open : false})
+      break
+
+      case "Tab" :
+        if(!this.state.open)
+          this.setState({open : true})
 
     }
   }
@@ -105,6 +110,7 @@ class SelectField extends React.Component{
           <input className="form-control" type="text" 
             value={this.state.val}
             onKeyUp={(e) =>{e.preventDefault(); me.oKU(e)}}
+            onBlur={()=>me.setState({open : false})}
           />
           <div className="input-group-append">
             <div className="input-group-text">
