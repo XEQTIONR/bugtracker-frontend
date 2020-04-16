@@ -25,10 +25,11 @@ class SelectField extends React.Component{
 
   select_option(index){
     
-    this.setState({val : this.props.values[index], open : false})
+    this.setState({val : this.props.values[index], open : false, hover_index : index})
   }
 
   oKU(event){
+    // console.log(event.key)
     switch (event.key){
 
       case "ArrowDown":
@@ -40,7 +41,7 @@ class SelectField extends React.Component{
         this.setState({
           open : true,
           hover_index : idx,
-          val : this.state.options[idx]
+          // val : this.state.options[idx]
           
         })
 
@@ -55,11 +56,23 @@ class SelectField extends React.Component{
 
           this.setState({
             hover_index : idx,
-            val : this.state.options[idx] 
+            // val : this.state.options[idx] 
             
           })  
         }
       break
+
+      case "Enter" :
+        if(this.state.open && this.state.hover_index != null)
+          this.select_option(this.state.hover_index)
+        else if(!this.state.open)
+          this.setState({open : true})
+      break
+
+      case "Escape" :
+        console.log("Escape")
+        if(this.state.open)
+          this.setState({open : false})
 
     }
   }
