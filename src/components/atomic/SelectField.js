@@ -105,8 +105,6 @@ class SelectField extends React.Component{
             className={ me.state.hover_index == index ? "bg-primary list-group-item pl-2-5" : "list-group-item pl-2-5 "} 
             onMouseOver={()=> me.setState({hover_index: index}) } 
             onClick={(e)=>{ 
-              console.log("BIKBIK")
-              console.log("BOKBOK")
               e.stopPropagation()
               me.select_option(index)
           }}
@@ -125,11 +123,7 @@ class SelectField extends React.Component{
             value={this.state.val}
             onKeyUp={(e) =>{e.preventDefault(); me.oKU(e)}}
             onBlur={(e)=>{
-            //   e.stopPropagation()
-            //   me.oB()
-              // me.setState({open : false})
               console.log("BLUR")
-            
             }}
           />
           <div className="input-group-append">

@@ -11,44 +11,31 @@ function NewIssue(props){
       onClick={()=>props.dismissCb(false)}
       >
         {/* <div> */}
-          <form className="card bg-gray-100 w-50" onClick={(e)=>{ e.stopPropagation(); console.log("FORM CLICKED")}}>
+          <form className="card bg-gray-100 w-50" onClick={(e)=>{ e.stopPropagation(); console.log("FORM CLICKED")}}
+            style={{ overflowY : "scroll", maxHeight: "90%"}}
+          >
             <div className="card-body">
               <div className="form-group">
                 <label>Title / Summary</label>
                 <TextField  placeholder="A brief overview"/>
               </div>
-              <div className="row">
-                {/* <div className=" col-6 pl-0">
-                  <div className="form-group">
-                    <label>Issue type</label>
-                    <select className="selectpicker" data-style="btn-primary">
-                      <option data-icon="fas fa-times-circle"> Bug</option>
-                      <option data-icon="fas fa-chevron-circle-up"> Improvement</option>
-                      <option data-icon="fas fa-check-circle"> Task</option>
-                      <option data-icon="fas fa-plus-circle"> New Feature</option>
-                    </select>
-                  </div>
-                </div> */}
-              
+              <div className="row">              
                 <div className="col-6">
-
-
 
                   <div className="form-group">
                     <label>Issue type</label>
                     <SelectField  values={["Bug", "Task", "New Feature", "Epic"]} />
-                    
                   </div>
 
                 </div>
-                </div>
+              </div>
 
 
 
-                <div className="form-group">
-                  <label>Description</label>
-                  <textarea className="w-100"></textarea>
-                </div>
+              <div className="form-group">
+                <label>Description</label>
+                <textarea className="w-100"></textarea>
+              </div>
 
                 <div className="row">
                 <div className="col-6">
