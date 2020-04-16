@@ -15,6 +15,7 @@ class SelectField extends React.Component{
     this.oKU = this.oKU.bind(this)
     this.toggle_select_button = this.toggle_select_button.bind(this)
     this.select_option = this.select_option.bind(this)
+    this.oB = this.oB.bind(this)
   } 
 
   toggle_select_button(){
@@ -26,6 +27,14 @@ class SelectField extends React.Component{
   select_option(index){
     
     this.setState({val : this.props.values[index], open : false, hover_index : index})
+  }
+
+  oB(){
+
+    // if(this.state.hover_index != null)
+    //   this.setState({ open : false, val : this.props.values[this.state.hover_index]})
+    // else
+      this.setState({open : false})
   }
 
   oKU(event){
@@ -95,7 +104,12 @@ class SelectField extends React.Component{
         <div key={index} 
             className={ me.state.hover_index == index ? "bg-primary list-group-item pl-2-5" : "list-group-item pl-2-5 "} 
             onMouseOver={()=> me.setState({hover_index: index}) } 
-            onClick={()=> me.select_option(index)}
+            onClick={(e)=>{ 
+              console.log("BIKBIK")
+              console.log("BOKBOK")
+              e.stopPropagation()
+              me.select_option(index)
+          }}
             > 
 
           {element}
@@ -110,7 +124,13 @@ class SelectField extends React.Component{
           <input className="form-control" type="text" 
             value={this.state.val}
             onKeyUp={(e) =>{e.preventDefault(); me.oKU(e)}}
-            onBlur={()=>me.setState({open : false})}
+            onBlur={(e)=>{
+            //   e.stopPropagation()
+            //   me.oB()
+              // me.setState({open : false})
+              console.log("BLUR")
+            
+            }}
           />
           <div className="input-group-append">
             <div className="input-group-text">
