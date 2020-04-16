@@ -34,22 +34,53 @@ function NewIssue(props){
 
 
 
+                  <div className="form-group">
+                    <label>Issue type</label>
+                    <SelectField  values={["Bug", "Task", "New Feature", "Epic"]} />
+                    
+                  </div>
+
+                </div>
+                </div>
+
+
+
                 <div className="form-group">
-                  <label>Issue type</label>
-                  <SelectField  values={["Bug", "Task", "New Feature", "Epic"]} />
+                  <label>Description</label>
+                  <textarea className="w-100"></textarea>
                 </div>
 
+                <div className="row">
+                <div className="col-6">
 
 
+
+                    <div className="form-group">
+                      <label>Related To</label>
+                      <SelectField  values={["Bug", "Task", "New Feature", "Epic"]} />
+                      
+                    </div>
 
                 </div>
-              </div>
+                <div className="col-6">
 
-              <div className="form-group">
-                <label>Description</label>
-                <textarea className="w-100"></textarea>
-              </div>
 
+
+                    <div className="form-group">
+                      <label>Relation type</label>
+                      <SelectField  values={["Causes", "Side Effect", "Other", "What"]} />
+                      
+                    </div>
+
+                </div>
+                
+                </div>
+
+                <div className="form-group">
+                      <label>Assigned To</label>
+                      <SelectField  values={["Causes", "Side Effect", "Other", "What"]} />
+                      
+                    </div>
 
                 <Button buttonClasses="btn btn-success float-right" label="test button"/>
             </div>
