@@ -6,10 +6,15 @@ class SelectField extends React.Component{
     
     super(props)
     this.state = {
-      selected : props.values[0],
+      val : props.values[0],
+      options : props.values,
       hover_index : null,
       open : false
     }
+
+    this.oKU = this.oKU.bind(this)
+    this.toggle_select_button = this.toggle_select_button.bind(this)
+    this.select_option = this.select_option.bind(this)
   } 
 
   toggle_select_button(){
@@ -20,7 +25,43 @@ class SelectField extends React.Component{
 
   select_option(index){
     
-    this.setState({selected : this.props.values[index], open : false})
+    this.setState({val : this.props.values[index], open : false})
+  }
+
+  oKU(event){
+    switch (event.key){
+
+      case "ArrowDown":
+
+        let idx = this.state.hover_index === null 
+                  ? 0 
+                  : (this.state.hover_index + 1) % this.state.options.length
+
+        this.setState({
+          open : true,
+          hover_index : idx,
+          val : this.state.options[idx]
+          
+        })
+
+      break
+
+      case "ArrowUp" :
+        if(this.state.open)
+        {
+          let idx = this.state.hover_index === 0 
+          ? (this.state.options.length - 1)
+          : Math.abs(this.state.hover_index - 1) % this.state.options.length
+
+          this.setState({
+            hover_index : idx,
+            val : this.state.options[idx] 
+            
+          })  
+        }
+      break
+
+    }
   }
 
   render(){
@@ -49,8 +90,9 @@ class SelectField extends React.Component{
       <div className="w-100" style={{maxHeight : "2rem"}}>
         <div className="input-group select-field" onClick={(e) =>{e.stopPropagation(); this.toggle_select_button()}}>
           <input className="form-control" type="text" 
-            value={this.state.selected}>
-          </input>
+            value={this.state.val}
+            onKeyUp={(e) =>{e.preventDefault(); me.oKU(e)}}
+          />
           <div className="input-group-append">
             <div className="input-group-text">
               <i className="fas fa-angle-down"></i>
