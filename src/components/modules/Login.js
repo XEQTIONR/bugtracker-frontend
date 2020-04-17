@@ -113,8 +113,38 @@ function Login() {
         <div className="row justify-content-center mb-4">
           <small><strong>Sign in to your account</strong></small>
         </div>
-        <TextField change={setEmail} val={email}  label="Email" placeholder="Your Email Address" type="email" inputGroup="Y"/>
-        <TextField change={setPassword} val={password} label="Password" placeholder="Your Password" type="password"/>
+        
+        
+
+        <div className="form-group row justify-content-center">
+          <label className="col-md-3 col-form-label text-left ">
+            Email
+          </label> 
+          <div className="col-md-9">
+            {/* <div className="input-group">   */}
+                <TextField change={setEmail} val={email}  label="Email" placeholder="Your Email Address" type="email"/>
+            {/* </div> */}
+          </div>
+        </div>
+
+        <div className="form-group row justify-content-center">
+          <label className="col-md-3 col-form-label text-left ">
+            Password
+          </label> 
+          <div className="col-md-9">
+            {/* <div className="input-group">   */}
+                <TextField change={setPassword} val={password} label="Password" placeholder="Your Password" type="password"/>
+            {/* </div> */}
+          </div>
+        </div>
+
+
+
+
+
+
+
+        
         <div className="form-group row">
             <div className="col-md-3 offset-md-9 mt-1 mt-md-2 ">
                 <Button onClick={login} label="Sign In" buttonClasses="btn btn-primary btn-block" blockThreshold="768"/>

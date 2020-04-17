@@ -19,57 +19,43 @@ import React, {Component} from 'react';
 
 class TextField extends Component {
 
-    constructor(props){
-        super(props);
-        this.state = {val : props.val};
+  constructor(props){
+      super(props);
+      this.state = {val : props.val};
 
-        //this.handleChange = props.change;
-        this.handleChange = this.handleChange.bind(this);
-    }
+      //this.handleChange = props.change;
+      this.handleChange = this.handleChange.bind(this);
+  }
 
-    handleChange(e){
-        e.preventDefault();
-        
-        //set internal state
-        this.setState({val : e.target.value});
-        
-        //call to change callback
-        this.props.change(e.target.value);
-    }
+  handleChange(e){
+      e.preventDefault();
+      
+      //set internal state
+      this.setState({val : e.target.value});
+      
+      //call to change callback
+      this.props.change(e.target.value);
+  }
 
-    render() {
+  render() {
 
-      let label =
-          <label className="col-md-3 col-form-label text-left ">
-            {this.props.label}
-            </label> 
-
-      let input_group_append = 
-                  <div className="input-group-append">
-                    <div className="input-group-text">
-                      <span> {this.props.inputGroupAppend} </span>
-                    </div>
+    let input_group_append = 
+                <div className="input-group-append">
+                  <div className="input-group-text">
+                    <span> {this.props.inputGroupAppend} </span>
                   </div>
-
-      let label_set  = this.props.label != null ? true : false;
-
-        
-      return (
-          <div className="form-group row justify-content-center">
-                  { label_set ? label : ''}
-              <div className={ label_set ? "col-md-9" : "col-12"}>
-                <div className="input-group">
-                  <input className="form-control" 
-                        type={this.props.type !== undefined ? this.props.type : 'text'} 
-                        value={this.state.val} onChange={ (event) => this.handleChange(event)} 
-                        placeholder={this.props.placeholder} />
-                      { this.props.inputGroupAppend != null ? input_group_append : ''}
                 </div>
-              </div>
-          </div>
-            )            
-        
-    }
+    return (
+      <div className="input-group">
+        <input className="form-control" 
+            type={this.props.type !== undefined ? this.props.type : 'text'} 
+            value={this.state.val} onChange={ (event) => this.handleChange(event)} 
+            placeholder={this.props.placeholder} />
+        {this.props.inputGroupAppend != null ? input_group_append : ''}
+      </div>
+          )            
+      
+  }
 
 
 
