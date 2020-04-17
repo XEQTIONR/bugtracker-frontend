@@ -12,7 +12,7 @@ function TasksPage(props){
         <div className="row mx-2 mt-3 mb-3">
           <div className="col-12">
             {/* <h2 className="ml-1">Tasks Page</h2> */}
-            <h4 className="ml-1 text-muted">Your Tasks</h4>
+            <h2 className="ml-1 text-muted">Your Tasks</h2>
           </div>
         </div>
         <div className="row mx-2">

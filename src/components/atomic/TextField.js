@@ -64,9 +64,9 @@ class TextField extends Component {
                         value={this.state.val} onChange={ (event) => this.handleChange(event)} 
                         placeholder={this.props.placeholder} />
                       { this.props.inputGroupAppend != null ? input_group_append : ''}
-                  </div>
                 </div>
               </div>
+          </div>
             )            
         
     }

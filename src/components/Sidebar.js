@@ -74,10 +74,11 @@ return(
     
     <SidebarDivider open={myState.open} />
     
-    <SidebarSection title="ze title" open={myState.open}>
-      <SidebarItem title="Components" to="/" icon="fas fa-home" open={myState.open} />
+    <SidebarSection title="Modules" open={myState.open}>
+      <SidebarItem title="Organizations" to="/" icon="fas fa-home" open={myState.open} />
       <SidebarItem title="Tasks" to="/tasks"  icon="fas fa-clipboard-list" open={myState.open} />
       <SidebarItem title="Mission Control"  to="/home" icon="fas fa-rocket"  open={myState.open} />
+      <SidebarItem title="Projects"  to="/projects" icon="fas fa-drafting-compass"  open={myState.open} />
     </SidebarSection>
 
   </div>

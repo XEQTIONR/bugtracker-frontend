@@ -30,10 +30,6 @@ class SelectField extends React.Component{
   }
 
   oB(){
-
-    // if(this.state.hover_index != null)
-    //   this.setState({ open : false, val : this.props.values[this.state.hover_index]})
-    // else
       this.setState({open : false})
   }
 

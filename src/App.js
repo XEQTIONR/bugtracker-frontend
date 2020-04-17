@@ -5,10 +5,12 @@ import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom
 import LoginPage from './components/pages/LoginPage'
 import UserHomePage from './components/pages/UserHomePage'
 import TasksPage from './components/pages/TasksPage'
+import ProjectsPage from './components/pages/ProjectsPage'
 import Nav from './components/Nav'
 import Sidebar from './components/Sidebar'
 import TestComp from './TestComp'
 import NewIssue from './components/modals/NewIssue'
+import NewProject from './components/modals/NewProject'
 
 
 import './App.scss';
@@ -46,9 +48,9 @@ function App() {
 
     const authState = store.getState().AuthReducer.authState
     const [sidebarState, setSidebarState] = useState(false)
-    const [showModal, setShowModal] = useState(false);
+    const [showNewIssueModal, setShowNewIssueModal] = useState(false);
+    const [showNewProjectModal, setShowNewProjectModal] = useState(false);
 
-    const modal = showModal ? <NewIssue /> : "";
 
 
     const sidebarTransitionSpeed = "0.5s"
@@ -58,8 +60,9 @@ function App() {
         <div className="App container-fluid p-0" >
           <ToastContainer />
           
-          {showModal ? <NewIssue dismissCb={setShowModal} /> : ""}
-
+          {showNewIssueModal ? <NewIssue dismissCb={setShowNewIssueModal} /> : ""}
+          {showNewProjectModal ? <NewProject dismissCb={setShowNewProjectModal} /> : ""}
+          
           <Switch>
           <Route path='/' exact > <TestComp title="/  route (home)" /> </Route>
           <Route path='/home' exact > 
@@ -70,7 +73,12 @@ function App() {
           <Route path='/login' exact > <LoginPage /> </Route>
           <Route path='/tasks' exact > 
                   <Sidebar speed={sidebarTransitionSpeed} cb={setSidebarState} />
-                  <TasksPage speed={sidebarTransitionSpeed} sidebarState={sidebarState} modalCb={setShowModal} /> 
+                  <TasksPage speed={sidebarTransitionSpeed} sidebarState={sidebarState} modalCb={setShowNewIssueModal} /> 
+          </Route>
+
+          <Route path='/projects' exact>
+            <Sidebar speed={sidebarTransitionSpeed} cb={setSidebarState} />
+            <ProjectsPage speed={sidebarTransitionSpeed} sidebarState={sidebarState} modalCb={setShowNewProjectModal} />
           </Route>
 
           <PrivateRoute path='/test' cond={authState}> <TestComp title="/test route" /></PrivateRoute>
