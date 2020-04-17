@@ -2,6 +2,7 @@ import React from 'react'
 import TextField from '../atomic/TextField'
 import Button from '../atomic/Button'
 import SelectField from '../atomic/SelectField'
+import TextArea from '../atomic/TextArea'
 function NewIssue(props){
 
 
@@ -11,7 +12,7 @@ function NewIssue(props){
       onClick={()=>props.dismissCb(false)}
       >
         {/* <div> */}
-          <form className="card bg-gray-100 w-50" onClick={(e)=>{ e.stopPropagation(); console.log("FORM CLICKED")}}
+          <form className="card bg-gray-100" onClick={(e)=>{ e.stopPropagation(); console.log("FORM CLICKED")}}
             style={{ overflowY : "auto", maxHeight: "90%"}}
           >
             <div className="card-body">
@@ -34,7 +35,7 @@ function NewIssue(props){
 
               <div className="form-group">
                 <label>Description</label>
-                <textarea className="w-100"></textarea>
+                <TextArea classes="form-control"/>
               </div>
 
                 <div className="row">
