@@ -25,7 +25,7 @@ class TextArea extends Component{
 
     render(){
 
-      const classes = this.props.classes != undefined ? this.props.classes : "";      
+      const classes = this.props.classes != undefined ? this.props.classes : "form-control";      
       const placeholder = this.props.placeholder !== (undefined || null) ? this.props.placeholder : "";
 
 

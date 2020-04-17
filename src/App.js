@@ -11,7 +11,7 @@ import Sidebar from './components/Sidebar'
 import TestComp from './TestComp'
 import NewIssue from './components/modals/NewIssue'
 import NewProject from './components/modals/NewProject'
-
+import {setProjectState} from './store/actions/index'
 
 import './App.scss';
 import axios from "axios"
@@ -20,7 +20,6 @@ import { ToastContainer, toast } from 'react-toastify';
 
 
 import store from "./store"
-// import {setAuthState}  from "./store/actions"
 
 function PrivateRoute({ children, cond, ...rest }) {
   return (
@@ -51,17 +50,56 @@ function App() {
     const [showNewIssueModal, setShowNewIssueModal] = useState(false);
     const [showNewProjectModal, setShowNewProjectModal] = useState(false);
 
+    // const [projects, setProjects] = useState(null);
 
 
     const sidebarTransitionSpeed = "0.5s"
+
+
+    const getProjects = () =>{
+
+      axios.get('http://bugtracker.local/api/projects')
+            .then(res =>{
+              
+              console.log("GET PROJECTS RES")
+              console.log(res)
+              store.dispatch(setProjectState({projects : res.data}))
+              // setProjects(res.data)
+            })
+            .catch(error =>{
+
+              console.log("GET PROJECTS ERROR RES")
+              console.log(error.response)
+            })
+
+
+    }
+
+    const dismissNewIssueModal  = (val) => {
+
+      setShowNewIssueModal(val)
+    }
+
+    const dismissNewProjectModal  = (val) => {
+      if(val.dismiss)
+        setShowNewProjectModal(false)
+
+      if(val.refresh)
+      {
+        console.log("SHOULD REFRESH LIST OF PROEJCTS NOW")
+        getProjects();
+      }
+    }
+
+    
 
     return(
       <Router>
         <div className="App container-fluid p-0" >
           <ToastContainer />
           
-          {showNewIssueModal ? <NewIssue dismissCb={setShowNewIssueModal} /> : ""}
-          {showNewProjectModal ? <NewProject dismissCb={setShowNewProjectModal} /> : ""}
+          {showNewIssueModal ? <NewIssue dismissCb={dismissNewIssueModal} /> : ""}
+          {showNewProjectModal ? <NewProject dismissCb={dismissNewProjectModal} /> : ""}
           
           <Switch>
           <Route path='/' exact > <TestComp title="/  route (home)" /> </Route>
@@ -78,7 +116,7 @@ function App() {
 
           <Route path='/projects' exact>
             <Sidebar speed={sidebarTransitionSpeed} cb={setSidebarState} />
-            <ProjectsPage speed={sidebarTransitionSpeed} sidebarState={sidebarState} modalCb={setShowNewProjectModal} />
+            <ProjectsPage speed={sidebarTransitionSpeed} sidebarState={sidebarState} modalCb={setShowNewProjectModal} dataCb={getProjects} />
           </Route>
 
           <PrivateRoute path='/test' cond={authState}> <TestComp title="/test route" /></PrivateRoute>

@@ -1,10 +1,36 @@
 import React from 'react'
 import Page from '../atomic/Page'
-
+import store from '../../store'
+import {} from '../../store/reducers/ProjectReducer'
 function ProjectsPage(props){
 
-
+  let projects_render
+  
+  let projects = store.getState().ProjectReducer.projects
+  
+  if(projects ===  null)
+  {
+    props.dataCb()
+    projects_render = ''    
+  }
+  else  
+  {
+    projects_render =  projects.map((project) =>
+    
+      <div className="col-3">
+            <div className="card">
+              <div className="card-body">
+                
+                <h5 className="">{project.abbr}</h5>
+                <p>{project.name}</p>
+              </div>
+            </div>
+      </div>
+    )
+  }
   return(
+
+    
 
     <Page speed={props.speed} sidebarState={props.sidebarState}>
 
@@ -25,10 +51,16 @@ function ProjectsPage(props){
                   </button>
           </div>
         </div>
-        <div className="row mx-2">
+        <div className="row mx-2 mb-4">
           <div className="col-12">
               <h4 className="ml-1">Your Project</h4>
           </div>
+        </div>
+
+        <div className="row mx-2">
+          
+          {projects_render}
+        
         </div>
 
         

@@ -29,9 +29,19 @@ const setLogoutState = (param) =>{
   }
 }
 
+
+const setProjectState = (param) =>{
+  
+  return {
+    type : 'SET_PROJECTS_STATE',
+    payload : {projects : param.projects}
+  }
+}
+
 module.exports = {
   setAuthState,
   setAuthFailedState,
   setAuthCachedState,
-  setLogoutState
+  setLogoutState,
+  setProjectState
 }

@@ -18,8 +18,6 @@ function NewProject(props){
 
   const [dismissable, setDismissable] = useState(true)
 
-  const [formSize, getFormSize] = useState(null)
-
   const submit = (e) =>{
 
     e.stopPropagation()
@@ -38,7 +36,7 @@ function NewProject(props){
           setMyStatus("idle")
           ToasterNotification.success("Project Created")
           setDismissable(true)
-          props.dismissCb(false)
+          props.dismissCb({dismiss : true, refresh : true})
 
         })
         .catch(error =>{
@@ -73,7 +71,7 @@ function NewProject(props){
 
       <div className="form-group">
         <label>Description</label>
-        <TextArea change={setDescription} classes="form-control" placeholder="Small description of the project." />
+        <TextArea change={setDescription} placeholder="Small description of the project." />
       </div>
 
             <div className="form-group">
@@ -102,7 +100,7 @@ const working = <h1 className="m-auto"><i className="fa fa-spinner fa-pulse"></i
   return (
 
     <div className="modal-background d-flex justify-content-center align-items-center"
-          onClick={()=> {if(dismissable) {props.dismissCb(false)}}}
+          onClick={()=> {if(dismissable) {props.dismissCb({dismiss: true, refresh : false})}}}
     >
         <form className="card bg-gray-100 " onClick={(e)=>{ e.stopPropagation(); console.log("PROJECT FORM CLICKED")}}
           style={{ overflowY : "auto", maxHeight: "90%", minWidth: myStatus!="working" ? "375px" : "auto"}}

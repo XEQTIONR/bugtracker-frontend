@@ -1,6 +1,7 @@
 import { createStore, combineReducers } from 'redux'
 import AuthReducer from './reducers/AuthReducer'
-import { setAuthCachedState } from './actions'
+import ProjectReducer from './reducers/ProjectReducer'
+import { setAuthCachedState, setProjectState } from './actions'
 function saveToLocalStorage(state){
   try{
 
@@ -29,7 +30,7 @@ function loadFromLocalStorage(){
 const persistedState = loadFromLocalStorage();
 
 const rootReducer = combineReducers({
-  AuthReducer
+  AuthReducer, ProjectReducer
 })
 
 
