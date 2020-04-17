@@ -47,13 +47,6 @@ function NewProject(props){
           setDismissable(true)
         })
 
-    console.log("SUBMIT CLICKED")
-
-    console.log("name :" + name)
-    console.log("description :" + description)
-    console.log("abbr :" + abbr)
-
-
   }
 
 

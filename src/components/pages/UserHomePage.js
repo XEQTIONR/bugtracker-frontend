@@ -77,7 +77,6 @@ function UserHomePage(props) {
 
               <div class="info-box-content d-flex justify-content-center align-items-center">
                 <span class="info-box-text ">Create a new Project</span>
-                {/* <span class="info-box-number">1,410</span> */}
               </div>
             </div>
         </div>

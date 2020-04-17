@@ -16,7 +16,7 @@ import {setProjectState} from './store/actions/index'
 import './App.scss';
 import axios from "axios"
 
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 
 
 import store from "./store"
@@ -50,8 +50,6 @@ function App() {
     const [showNewIssueModal, setShowNewIssueModal] = useState(false);
     const [showNewProjectModal, setShowNewProjectModal] = useState(false);
 
-    // const [projects, setProjects] = useState(null);
-
 
     const sidebarTransitionSpeed = "0.5s"
 
@@ -64,7 +62,6 @@ function App() {
               console.log("GET PROJECTS RES")
               console.log(res)
               store.dispatch(setProjectState({projects : res.data}))
-              // setProjects(res.data)
             })
             .catch(error =>{
 
