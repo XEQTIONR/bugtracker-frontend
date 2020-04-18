@@ -1,7 +1,8 @@
 import React from 'react'
 import Page from '../atomic/Page'
 import store from '../../store'
-import {} from '../../store/reducers/ProjectReducer'
+import {Link} from 'react-router-dom'
+
 function ProjectsPage(props){
 
   let projects_render
@@ -16,8 +17,9 @@ function ProjectsPage(props){
   else  
   {
     projects_render =  projects.map((project) =>
-    
+
       <div className="col-3">
+    <Link to={'/projects/'+project.id}>
             <div className="card">
               <div className="card-body">
                 
@@ -25,9 +27,23 @@ function ProjectsPage(props){
                 <p>{project.name}</p>
               </div>
             </div>
+      </Link>
       </div>
     )
   }
+
+
+  const new_project_card = 
+  
+  <div className="col-3">
+    <div className="card" onClick={() => { if(props.modalCb!=undefined) props.modalCb(true)}}>
+      <div className="card-body">
+        
+        <h5 className="">New project</h5>
+        <p>"Create a new project"</p>
+      </div>
+    </div>
+  </div>
   return(
 
     
@@ -60,6 +76,7 @@ function ProjectsPage(props){
         <div className="row mx-2">
           
           {projects_render}
+          {new_project_card}
         
         </div>
 

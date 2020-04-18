@@ -6,6 +6,7 @@ import LoginPage from './components/pages/LoginPage'
 import UserHomePage from './components/pages/UserHomePage'
 import TasksPage from './components/pages/TasksPage'
 import ProjectsPage from './components/pages/ProjectsPage'
+import ProjectPage from './components/pages/ProjectPage'
 import Nav from './components/Nav'
 import Sidebar from './components/Sidebar'
 import TestComp from './TestComp'
@@ -114,6 +115,11 @@ function App() {
           <Route path='/projects' exact>
             <Sidebar speed={sidebarTransitionSpeed} cb={setSidebarState} />
             <ProjectsPage speed={sidebarTransitionSpeed} sidebarState={sidebarState} modalCb={setShowNewProjectModal} dataCb={getProjects} />
+          </Route>
+
+          <Route path='/projects/:id'>
+                <ProjectPage speed={sidebarTransitionSpeed} 
+                sidebarState={sidebarState} />
           </Route>
 
           <PrivateRoute path='/test' cond={authState}> <TestComp title="/test route" /></PrivateRoute>
