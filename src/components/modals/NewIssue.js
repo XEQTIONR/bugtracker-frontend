@@ -13,7 +13,7 @@ function NewIssue(props){
       >
         {/* <div> */}
           <form className="card bg-gray-100" onClick={(e)=>{ e.stopPropagation(); console.log("FORM CLICKED")}}
-            style={{ overflowY : "auto", maxHeight: "90%"}}
+            style={{ overflowY : "show", maxHeight: "90%"}}
           >
             <div className="card-body">
               <div className="form-group">
