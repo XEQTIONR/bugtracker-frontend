@@ -45,7 +45,10 @@ function NewIssue(props){
 
                     <div className="form-group">
                       <label>Related To</label>
-                      <SelectField  values={["Bug", "Task", "New Feature", "Epic"]} />
+                      <SelectField  values={[{value : "Bug", icon : "fas fa-bug mr-3"}, 
+                      {value : "Task", icon : "fas fa-check-square mr-3"}, 
+                      {value :"New Feature", icon: "fas fa-star mr-3"}, 
+                      {value :"Epic", icon : "fas fa-exclamation-triangle mr-3"}]} />
                       
                     </div>
 
@@ -66,7 +69,7 @@ function NewIssue(props){
 
                 <div className="form-group">
                       <label>Assigned To</label>
-                      <SelectField  values={["Causes", "Side Effect", "Other", "What"]} />
+                      <SelectField  values={["Causes", "Side Effect", "Other", "What"]} maxHeight="150px" />
                       
                     </div>
 

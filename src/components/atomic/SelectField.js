@@ -5,8 +5,11 @@ class SelectField extends React.Component{
   constructor(props){
     
     super(props)
+
+    let real_val = typeof props.values[0] === "string" ? props.values[0] : props.values[0].value
+
     this.state = {
-      val : props.values[0],
+      val : real_val,
       options : props.values,
       hover_index : null,
       open : false
@@ -26,7 +29,9 @@ class SelectField extends React.Component{
 
   select_option(index){
     
-    this.setState({val : this.state.options[index], open : false, hover_index : index})
+    let real_val = typeof this.props.values[index] === "string" ? this.props.values[index] : this.props.values[index].value
+
+    this.setState({val : real_val, open : false, hover_index : index})
   }
 
   oB(){
@@ -46,8 +51,6 @@ class SelectField extends React.Component{
         this.setState({
           open : true,
           hover_index : idx,
-          // val : this.state.options[idx]
-          
         })
 
       break
@@ -61,8 +64,6 @@ class SelectField extends React.Component{
 
           this.setState({
             hover_index : idx,
-            // val : this.state.options[idx] 
-            
           })  
         }
       break
@@ -96,6 +97,15 @@ class SelectField extends React.Component{
     let me = this
 
     this.state.options.forEach((element,index) => {
+
+    let render = 
+                typeof element === 'string' 
+                ? 
+                element
+                : <React.Fragment><i className={element.icon}></i>{element.value}</React.Fragment>
+
+
+
       list_items_render.push(
         <div key={index} 
             className={ me.state.hover_index == index ? "bg-primary list-group-item pl-2-5" : "list-group-item pl-2-5 "} 
@@ -105,8 +115,7 @@ class SelectField extends React.Component{
               me.select_option(index)
           }}
             > 
-
-          {element}
+          {render}
         
         </div>
       )
@@ -120,6 +129,7 @@ class SelectField extends React.Component{
             onKeyUp={(e) =>{e.preventDefault(); me.oKU(e)}}
             onBlur={(e)=>{
               console.log("BLUR")
+              this.setState({open : false})
             }}
           />
           <div className="input-group-append">
