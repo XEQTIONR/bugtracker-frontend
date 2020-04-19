@@ -107,20 +107,22 @@ function App() {
                   <UserHomePage speed={sidebarTransitionSpeed} sidebarState={sidebarState}  navbar={true}/> 
           </Route>
           <Route path='/login' exact > <LoginPage /> </Route>
-          <Route path='/tasks' exact > 
+          <PrivateRoute path='/tasks' exact > 
                   <Sidebar speed={sidebarTransitionSpeed} cb={setSidebarState} />
                   <TasksPage speed={sidebarTransitionSpeed} sidebarState={sidebarState} modalCb={setShowNewIssueModal} /> 
-          </Route>
+          </PrivateRoute>
 
-          <Route path='/projects' exact>
+          
+
+          <PrivateRoute path='/projects' cond={authState} exact>
             <Sidebar speed={sidebarTransitionSpeed} cb={setSidebarState} />
             <ProjectsPage speed={sidebarTransitionSpeed} sidebarState={sidebarState} modalCb={setShowNewProjectModal} dataCb={getProjects} />
-          </Route>
+          </PrivateRoute>
 
-          <Route path='/projects/:id'>
+          <PrivateRoute path='/projects/:id' cond={authState}>
                 <ProjectPage speed={sidebarTransitionSpeed} 
                 sidebarState={sidebarState} />
-          </Route>
+          </PrivateRoute>
 
           <PrivateRoute path='/test' cond={authState}> <TestComp title="/test route" /></PrivateRoute>
           </Switch>
