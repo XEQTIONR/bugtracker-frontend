@@ -1,25 +1,29 @@
-import { createStore, combineReducers } from 'redux'
-import AuthReducer from './reducers/AuthReducer'
-import ProjectReducer from './reducers/ProjectReducer'
-import { setAuthCachedState, setProjectState } from './actions'
+import { createStore } from 'redux'
+import allReducers from './reducers' 
+import { setAuthCachedState } from './actions'
 function saveToLocalStorage(state){
+
   try{
 
     const serializedState = JSON.stringify(state)
     localStorage.setItem('state', serializedState)
 
   } catch(e){
+    console.log("CATCH SAVING TO LOCAL STORAGE")
     console.log(e)
   }
 }
 
 function loadFromLocalStorage(){
+
+  console.log("TRY TO loadFromLocalStorage")
   try{
     const serializedState = localStorage.getItem('state')
     if(serializedState == null) return undefined
     return JSON.parse(serializedState)
   }
   catch(e){
+    console.log("CATCH localFromLocalStorage")
     console.log(e)
     return undefined //****/
   }
@@ -29,23 +33,23 @@ function loadFromLocalStorage(){
 
 const persistedState = loadFromLocalStorage();
 
-const rootReducer = combineReducers({
-  AuthReducer, ProjectReducer
-})
 
-
-const store = createStore(rootReducer, 
-                          persistedState, // INITIALIZATION DOESNT WORK
+const store = createStore(allReducers, 
+                          persistedState, 
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 
 
-console.log('STORE AFTER   persistedState ')
-console.log(store.getState())
+
 
 store.subscribe(() => saveToLocalStorage(store.getState()))
 
-if(persistedState!=undefined) //****/
+if(persistedState!=undefined) 
+{ 
+  console.log("set CACHED STATE")
+  console.log(persistedState);
   store.dispatch( setAuthCachedState(persistedState.AuthReducer))
+}
+  
 
 
 
