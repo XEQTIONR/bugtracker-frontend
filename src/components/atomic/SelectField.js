@@ -26,7 +26,7 @@ class SelectField extends React.Component{
 
   select_option(index){
     
-    this.setState({val : this.props.values[index], open : false, hover_index : index})
+    this.setState({val : this.state.options[index], open : false, hover_index : index})
   }
 
   oB(){
@@ -95,7 +95,7 @@ class SelectField extends React.Component{
 
     let me = this
 
-    this.props.values.forEach((element,index) => {
+    this.state.options.forEach((element,index) => {
       list_items_render.push(
         <div key={index} 
             className={ me.state.hover_index == index ? "bg-primary list-group-item pl-2-5" : "list-group-item pl-2-5 "} 
