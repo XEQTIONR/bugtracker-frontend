@@ -1,4 +1,5 @@
-const AuthReducer = (state, action) => {
+const AuthReducer = (state={authState : false , email: '', authStatus : 'unauthenticated'}, 
+                      action) => {
 
   switch(action.type){
 
@@ -15,7 +16,7 @@ const AuthReducer = (state, action) => {
     case 'SET_LOGOUT_STATE' :
 
      default :
-      return {authState : false , email: '', authStatus : 'unauthenticated'};
+      return state
   }
 
 }
