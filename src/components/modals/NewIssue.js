@@ -10,22 +10,24 @@ import store from '../../store'
 
 function NewIssue(props){
 
-  const [issueTypes, setIssueTypes] = useState([]) 
+  const [issueTypes, setIssueTypes] = useState(null) 
+  // const [projects, setProjects] = useState(store.getState().ProjectReducer.projects) 
+
+  
+
+  let projects = store.getState().ProjectReducer.projects
+  
+  if(projects ===  null)
+  {
+    props.dataCb()
+  }
+
 
   const getIssueTypes = () =>{
 
     axios.get('http://bugtracker.local/api/issue_types')
         .then(res => {
-            
-          let dat = res.data.map(type => {return {value : type.name, icon : type.icon}})
-
-          setIssueTypes(dat)
-          console.log("ISSUE TYPES")
-          console.log(res.data)          
-          console.log("dat")
-          console.log(dat)
-          console.log("issueTypes after set")
-          console.log(issueTypes)
+          setIssueTypes(res.data.map(type => {return {value : type.name, icon : type.icon}}))
         })
         .catch(error => {
           console.log(' get issue types error');
@@ -33,38 +35,20 @@ function NewIssue(props){
 
   }
 
-  // useEffect(() => {
-    
-  //   getIssueTypes()
-  //   // return () => {
-  //   //   cleanup
-  //   // }
-  // }, [])
-
-
-
-  let projects = store.getState().ProjectReducer.projects
-
-  if(projects === null)
-    props.dataCb()
-
-  if(!issueTypes.length)
+  
+  if(issueTypes === null)
     getIssueTypes()
-
+      
   
   const working = <h1 className="m-auto"><i className="fa fa-spinner fa-pulse"></i></h1>
   
   
-  const form = 
-  
-  <form className="card bg-gray-100" onClick={(e)=>{ e.stopPropagation(); console.log("FORM CLICKED")}}
-  style={{ overflowY : "show", maxHeight: "90%"}}
->
-  <div className="card-body">
+  let form = 
+    <React.Fragment>
     <div className="form-group">
       <label>Project</label>
-      <SelectField values={projects.map(project=> project.abbr+" - "+project.name)} />
-    </div>
+      <SelectField values={(projects!=null && projects.length)? projects.map(project=> project.abbr+" - "+project.name) : []} />
+    </div> 
     <div className="form-group">
       <label>Title / Summary</label>
       <TextField  placeholder="A brief overview"/>
@@ -103,16 +87,14 @@ function NewIssue(props){
     </div>
 
       <Button buttonClasses="btn btn-success float-right" label="test button"/>
-  </div>
-
-  </form>
+      </React.Fragment>
   
   
   
   
   
   
-  let content = projects === null || !issueTypes.length
+  let content = projects === null || issueTypes=== null
               ? working
               : form 
                       
@@ -122,7 +104,14 @@ function NewIssue(props){
       <div className="modal-background d-flex justify-content-center align-items-center"
       onClick={()=>props.dismissCb(false)}
       >          
-        {content}
+        <form className="card bg-gray-100" onClick={(e)=>{ e.stopPropagation(); console.log("FORM CLICKED")}}
+              style={{ overflowY : "show", maxHeight: "90%"}}
+        >
+          <div className="card-body">
+              {content}
+          </div>
+
+        </form>
       </div>
 
 
