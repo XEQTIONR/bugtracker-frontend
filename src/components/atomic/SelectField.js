@@ -7,13 +7,23 @@ class SelectField extends React.Component{
     super(props)
 
     let real_val
-    if(props.values.length)
+    let label
+    
+    //
+    if(props.values.length){
+      
       real_val = typeof props.values[0] === "string" ? props.values[0] : props.values[0].value
+      label =  props.values[0].label !== undefined ? props.values[0].label : props.values[0]
+    }
     else
+    {
       real_val = null
+      label = null
+    }
     
       this.state = {
       val : real_val,
+      label : label,
       options : props.values,
       hover_index : null,
       open : false
@@ -34,8 +44,10 @@ class SelectField extends React.Component{
   select_option(index){
     
     let real_val = typeof this.props.values[index] === "string" ? this.props.values[index] : this.props.values[index].value
+    let label = typeof this.props.values[index] === "string" ? this.props.values[index] : typeof this.props.values[index].label!="undefined" ? this.props.values[index].label  : this.props.values[index].value
 
-    this.setState({val : real_val, open : false, hover_index : index})
+
+    this.setState({val : real_val, label : label, open : false, hover_index : index})
   }
 
   oB(){
@@ -106,7 +118,7 @@ class SelectField extends React.Component{
                 typeof element === 'string' 
                 ? 
                 element
-                : <React.Fragment><i className={element.icon}></i>{element.value}</React.Fragment>
+                : <React.Fragment><i className={element.icon}></i>{typeof element.label !== "undefined" ? element.label : element.value}</React.Fragment>
 
 
 
@@ -129,7 +141,7 @@ class SelectField extends React.Component{
       <div className="w-100" style={{maxHeight : "2rem"}}>
         <div className="input-group select-field" onClick={(e) =>{e.stopPropagation(); this.toggle_select_button()}}>
           <input className="form-control" type="text" 
-            value={this.state.val}
+            value={this.state.label!==undefined ? this.state.label : this.state.val}
             onKeyUp={(e) =>{e.preventDefault(); me.oKU(e)}}
             onBlur={(e)=>{
               console.log("BLUR")
