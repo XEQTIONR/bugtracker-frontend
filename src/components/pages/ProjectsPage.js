@@ -66,6 +66,16 @@ function ProjectsPage(props){
                     <span className="text">Create a new project</span>
                   </button>
           </div>
+          <div className="col-12">
+              <button className="btn btn-primary btn-icon-split btn-sm p-0 ml-5 mb-3 "
+                              onClick={() => { if(props.issueModalCb!=undefined) props.issueModalCb(true)}}
+                      >
+                        <span className="icon text-white-50">
+                          <i className="fa fa-plus"></i>
+                        </span>
+                        <span className="text">New Issue</span>
+                      </button>
+          </div>
         </div>
         <div className="row mx-2 mb-4">
           <div className="col-12">

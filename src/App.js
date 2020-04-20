@@ -96,7 +96,7 @@ function App() {
         <div className="App container-fluid p-0" >
           <ToastContainer />
           
-          {showNewIssueModal ? <NewIssue dismissCb={dismissNewIssueModal} /> : ""}
+          {showNewIssueModal ? <NewIssue dismissCb={dismissNewIssueModal} dataCb={getProjects} /> : ""}
           {showNewProjectModal ? <NewProject dismissCb={dismissNewProjectModal} /> : ""}
           
           <Switch>
@@ -115,8 +115,12 @@ function App() {
           
 
           <PrivateRoute path='/projects' cond={authState} exact>
+            
             <Sidebar speed={sidebarTransitionSpeed} cb={setSidebarState} />
-            <ProjectsPage speed={sidebarTransitionSpeed} sidebarState={sidebarState} modalCb={setShowNewProjectModal} dataCb={getProjects} />
+            <ProjectsPage speed={sidebarTransitionSpeed} sidebarState={sidebarState} 
+              modalCb={setShowNewProjectModal} issueModalCb={setShowNewIssueModal} 
+              dataCb={getProjects} />
+          
           </PrivateRoute>
 
           <PrivateRoute path='/projects/:id' cond={authState}>

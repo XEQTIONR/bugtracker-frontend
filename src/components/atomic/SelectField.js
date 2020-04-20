@@ -6,9 +6,13 @@ class SelectField extends React.Component{
     
     super(props)
 
-    let real_val = typeof props.values[0] === "string" ? props.values[0] : props.values[0].value
-
-    this.state = {
+    let real_val
+    if(props.values.length)
+      real_val = typeof props.values[0] === "string" ? props.values[0] : props.values[0].value
+    else
+      real_val = null
+    
+      this.state = {
       val : real_val,
       options : props.values,
       hover_index : null,
