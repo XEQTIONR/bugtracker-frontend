@@ -112,7 +112,7 @@ class SelectField extends React.Component{
 
       list_items_render.push(
         <div key={index} 
-            className={ me.state.hover_index == index ? "bg-primary list-group-item pl-2-5" : "list-group-item pl-2-5 "} 
+            className={ me.state.hover_index == index ? "bg-primary list-group-item" : "list-group-item"} 
             onMouseOver={()=> me.setState({hover_index: index}) } 
             onClick={(e)=>{ 
               e.stopPropagation()

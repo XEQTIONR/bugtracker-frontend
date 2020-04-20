@@ -14,7 +14,7 @@ function NewIssue(props){
   // const [projects, setProjects] = useState(store.getState().ProjectReducer.projects) 
 
   
-
+  //cant make projects a state variable as above
   let projects = store.getState().ProjectReducer.projects
   
   if(projects ===  null)
