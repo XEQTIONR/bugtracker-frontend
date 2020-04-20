@@ -131,10 +131,6 @@ class SelectField extends React.Component{
           <input className="form-control" type="text" 
             value={this.state.val}
             onKeyUp={(e) =>{e.preventDefault(); me.oKU(e)}}
-            onBlur={(e)=>{
-              console.log("BLUR")
-              this.setState({open : false})
-            }}
           />
           <div className="input-group-append">
             <div className="input-group-text">
