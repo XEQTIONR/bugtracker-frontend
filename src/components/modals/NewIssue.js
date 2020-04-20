@@ -13,7 +13,13 @@ function NewIssue(props){
   const [issueTypes, setIssueTypes] = useState(null) 
   // const [projects, setProjects] = useState(store.getState().ProjectReducer.projects) 
 
-  
+
+ const [project, setProject] = useState(null)
+ const [title, setTitle] = useState(null)
+ const [description, setDescription] = useState(null)
+ const [issueType, setIssueType] = useState(null)
+
+
   //cant make projects a state variable as above
   let projects = store.getState().ProjectReducer.projects
   
@@ -23,6 +29,23 @@ function NewIssue(props){
   }
 
 
+  const submit = () => {
+
+    axios.post('http://bugtracker.local/api/issue',{
+              project, title, description, issueType
+          })
+          .then(res =>{
+            console.log("RESPONSE", res)
+          })
+          .catch(e =>{
+            console.log("ERROR", e)
+            console.log("ERROR response", e.response)
+          })
+
+
+  }
+  
+  
   const getIssueTypes = () =>{
 
     axios.get('http://bugtracker.local/api/issue_types')
@@ -47,23 +70,25 @@ function NewIssue(props){
     <React.Fragment>
     <div className="form-group">
       <label>Project</label>
-      <SelectField values={(projects!=null && projects.length)? projects.map(project=> project.abbr+" - "+project.name) : []} />
+      <SelectField values={(projects!=null && projects.length)? projects.map(project=> { return {value : project.id, label : project.abbr+" - "+project.name} }) : []} 
+                  selectedCb={setProject}
+      />
     </div> 
     <div className="form-group">
       <label>Title / Summary</label>
-      <TextField  placeholder="A brief overview of this ticket"/>
+      <TextField change={setTitle}  placeholder="A brief overview of this ticket"/>
     </div>
     <div className="row">              
       <div className="col-6">
         <div className="form-group">
           <label>Issue type</label>
-          <SelectField  values={issueTypes} />
+          <SelectField  values={issueTypes}  selectedCb={setIssueType}/>
         </div>
       </div>
     </div>
     <div className="form-group">
       <label>Description</label>
-      <TextArea classes="form-control"/>
+      <TextArea classes="form-control" change={setDescription} placeholder="More detailed description of the ticket" />
     </div>
 
     <div className="form-group">
@@ -71,7 +96,7 @@ function NewIssue(props){
       <SelectField  values={["Causes", "Side Effect", "Other", "What"]} maxHeight="150px" />      
     </div>
 
-      <Button buttonClasses="btn btn-success float-right" label="test button"/>
+      <Button onClick={submit} buttonClasses="btn btn-success float-right" label="test button"/>
       </React.Fragment>
   
   

@@ -48,6 +48,9 @@ class SelectField extends React.Component{
 
 
     this.setState({val : real_val, label : label, open : false, hover_index : index})
+  
+    if(this.props.selectedCb!== undefined)
+      this.props.selectedCb(real_val)
   }
 
   oB(){
