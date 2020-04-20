@@ -107,7 +107,7 @@ function App() {
                   <UserHomePage speed={sidebarTransitionSpeed} sidebarState={sidebarState}  navbar={true}/> 
           </Route>
           <Route path='/login' exact > <LoginPage /> </Route>
-          <PrivateRoute path='/tasks' exact > 
+          <PrivateRoute path='/tasks' exact cond={authState}> 
                   <Sidebar speed={sidebarTransitionSpeed} cb={setSidebarState} />
                   <TasksPage speed={sidebarTransitionSpeed} sidebarState={sidebarState} modalCb={setShowNewIssueModal} /> 
           </PrivateRoute>
@@ -120,8 +120,9 @@ function App() {
           </PrivateRoute>
 
           <PrivateRoute path='/projects/:id' cond={authState}>
-                <ProjectPage speed={sidebarTransitionSpeed} 
-                sidebarState={sidebarState} />
+            <Sidebar speed={sidebarTransitionSpeed} cb={setSidebarState} />
+            <ProjectPage speed={sidebarTransitionSpeed} 
+              sidebarState={sidebarState} />
           </PrivateRoute>
 
           <PrivateRoute path='/test' cond={authState}> <TestComp title="/test route" /></PrivateRoute>

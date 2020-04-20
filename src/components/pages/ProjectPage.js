@@ -3,6 +3,8 @@ import Page from '../atomic/Page'
 import store from '../../store'
 import {useParams} from 'react-router'
 
+import {setCurrentProjectState} from '../../store/actions/index'
+
 import axios from 'axios'
 
 function ProjectPage({ speed, sidebarState}){ 
@@ -21,6 +23,7 @@ function ProjectPage({ speed, sidebarState}){
               
               console.log("api call res")
               setProject(res.data)
+              store.dispatch(setCurrentProjectState({current_project : res.data}))
               setStatus('project-set')
             })
             .catch(error =>{
@@ -47,6 +50,7 @@ function ProjectPage({ speed, sidebarState}){
         if(theproject!= undefined)
         {
           setProject(theproject)
+          store.dispatch(setCurrentProjectState({current_project : theproject}))
           setStatus('project-set')
         }
     }
@@ -60,19 +64,31 @@ function ProjectPage({ speed, sidebarState}){
 
   let content = (status === 'init') ? '' :
         <React.Fragment>
-          <h2>{params.id}</h2>
-          <h3>{project.name}</h3>
-          <h4>{project.abbr}</h4>
+          <div className="row mx-2 mt-3 mb-3">
+            
+            <div className="col-12">
+              <h2 className="ml-1">{project.name}</h2>
+              <h3 className="ml-1 text-muted">{project.abbr}</h3>
+            </div>
+        
+            <div className="col-12">
+              <p>{project.description}</p>
+            </div>
+          
+          </div>
         </React.Fragment>
 
   return(
 
     
     
-
     <Page speed={speed} sidebarState={sidebarState}>
-          <h1>Single project page</h1>
-          {content}
+    <div className="row mx-2 mt-3 mb-3">
+          <div className="col-12">
+            {/* <h2 className="ml-1">Tasks Page</h2> */}
+            {content}
+          </div>
+    </div>
     </Page>
   )
 
