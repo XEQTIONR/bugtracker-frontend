@@ -51,7 +51,7 @@ function NewIssue(props){
     </div> 
     <div className="form-group">
       <label>Title / Summary</label>
-      <TextField  placeholder="A brief overview"/>
+      <TextField  placeholder="A brief overview of this ticket"/>
     </div>
     <div className="row">              
       <div className="col-6">
@@ -64,21 +64,6 @@ function NewIssue(props){
     <div className="form-group">
       <label>Description</label>
       <TextArea classes="form-control"/>
-    </div>
-    <div className="row">
-      <div className="col-6">
-          <div className="form-group">
-            <label>Related To</label>
-            <SelectField  values={issueTypes} />
-          </div>
-      </div>
-      <div className="col-6">
-          <div className="form-group">
-            <label>Relation type</label>
-            <SelectField  values={["Causes", "Side Effect", "Other", "What"]} />
-          </div>
-      </div>
-    
     </div>
 
     <div className="form-group">
@@ -105,7 +90,7 @@ function NewIssue(props){
       onClick={()=>props.dismissCb(false)}
       >          
         <form className="card bg-gray-100" onClick={(e)=>{ e.stopPropagation(); console.log("FORM CLICKED")}}
-              style={{ overflowY : "show", maxHeight: "90%"}}
+              style={{ overflowY : "show", maxHeight: "90%", minWidth : content==working ? "auto" : "500px"}}
         >
           <div className="card-body">
               {content}
