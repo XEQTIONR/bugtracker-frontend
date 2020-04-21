@@ -14,17 +14,36 @@ function ProjectPage({ speed, sidebarState}){
 
   const [project, setProject] = useState(null)
 
+  const [issues, setIssues] = useState(null)
+
   const [status, setStatus] = useState('init')
 
+  
+  
+  const getIssues = (project_id) => {
+    axios.get('http://bugtracker.local/api/projects/'+project_id+'/issues')
+        .then(res => {
+          setIssues(res.data)
+        })
+        .catch(error => {
+          console.log("get issues error", error.response)
+        })
+  }
+  
   const getProject = (project_id) => {
 
       axios.get('http://bugtracker.local/api/projects/'+project_id)
             .then(res => {
               
               console.log("api call res")
+              console.log(res.data)
               setProject(res.data)
+
               store.dispatch(setCurrentProjectState({current_project : res.data}))
               setStatus('project-set')
+
+              getIssues(project_id)
+
             })
             .catch(error =>{
                 console.log('api call error')
@@ -32,7 +51,7 @@ function ProjectPage({ speed, sidebarState}){
             })
 
   }
-  
+
   let projects
   //const getProject = 
 
@@ -50,6 +69,7 @@ function ProjectPage({ speed, sidebarState}){
         if(theproject!= undefined)
         {
           setProject(theproject)
+          getIssues(theproject.id)
           store.dispatch(setCurrentProjectState({current_project : theproject}))
           setStatus('project-set')
         }
@@ -61,6 +81,17 @@ function ProjectPage({ speed, sidebarState}){
 
 
   }, [])
+
+
+  let issue_render = issues == null ? "Loading" :
+                      issues.map(issue =>
+                        <li className="list-group-item">
+                          <i className={issue.type.icon}></i>
+                          <b>{project.abbr}-{issue.serial_no}</b> 
+                          <span className="ml-2">{issue.title}</span>
+                        </li>
+                      )
+
 
   let content = (status === 'init') ? '' :
         <React.Fragment>
@@ -75,6 +106,17 @@ function ProjectPage({ speed, sidebarState}){
               <p>{project.description}</p>
             </div>
           
+          </div>
+          <div className = "row mx-2 justify-content-center">
+            <div className="col-12">
+              <div className="card">
+                <div className="card-body">
+                  <ul className="list-group list-group-flush">
+                      {issue_render}
+                  </ul>
+                </div>
+              </div>
+            </div>
           </div>
         </React.Fragment>
 
