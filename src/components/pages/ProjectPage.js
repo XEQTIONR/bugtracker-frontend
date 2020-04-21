@@ -85,10 +85,27 @@ function ProjectPage({ speed, sidebarState}){
 
   let issue_render = issues == null ? "Loading" :
                       issues.map(issue =>
-                        <li className="list-group-item">
-                          <i className={issue.type.icon}></i>
-                          <b>{project.abbr}-{issue.serial_no}</b> 
+                        <li className="list-group-item d-flex justify-content-start">
+
+
+                          
+                          {/* <span className="badge badge-danger p-0"> */}
+                            <div className="d-flex badge badge-danger justify-content-center align-items-center"
+                              style={{width : "2em", height: "2em" }}
+                            >
+                                <i className={issue.type.icon}></i>
+                            </div>
+                            
+                          <span className="ml-2">
+                            <strong>{project.abbr}-{issue.serial_no}</strong> 
+                          </span>
+                          {/* </span> */}
+                              
+                          
+                          
                           <span className="ml-2">{issue.title}</span>
+
+
                         </li>
                       )
 
@@ -110,7 +127,10 @@ function ProjectPage({ speed, sidebarState}){
           <div className = "row mx-2 justify-content-center">
             <div className="col-12">
               <div className="card">
-                <div className="card-body">
+                <div className="card-header">
+                  Tasks
+                </div>
+                <div className="card-body p-0">
                   <ul className="list-group list-group-flush">
                       {issue_render}
                   </ul>
