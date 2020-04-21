@@ -127,7 +127,15 @@ class SelectField extends React.Component{
                 typeof element === 'string' 
                 ? 
                 element
-                : <React.Fragment><i className={element.icon}></i>{typeof element.label !== "undefined" ? element.label : element.value}</React.Fragment>
+                : 
+                // <React.Fragment>
+                  <div className="w-100 h-100 d-flex align-items-center">
+                    <div className="d-flex justify-content-center align-items-center" style={{width : "1em", height: "1em" }}>
+                      <i className={" m-auto " + element.icon}></i>
+                    </div>
+                    <span className="ml-2">{typeof element.label !== "undefined" ? element.label : element.value}</span>
+                  </div>
+                  // </React.Fragment>
 
 
 
