@@ -6,6 +6,7 @@ import TextArea from '../atomic/TextArea'
 import axios from 'axios'
 
 import store from '../../store'
+import ToasterNotification from '../modules/ToasterNotification'
 
 
 function NewIssue(props){
@@ -31,11 +32,19 @@ function NewIssue(props){
 
   const submit = () => {
 
-    axios.post('http://bugtracker.local/api/issue',{
-              project, title, description, issueType
-          })
+    let params = {project, title, description, issueType}
+
+    console.log("ParaMs are ", params)
+
+    axios.post('http://bugtracker.local/api/issue',params)
           .then(res =>{
-            console.log("RESPONSE", res)
+            //console.log("RESPONSE", res)
+            if(res.status == 200) //OK
+            {
+              
+              props.dismissCb(false) // == showNewProjectModal
+              ToasterNotification.success(res.data.issue.key+" - "+res.data.message)
+            }
           })
           .catch(e =>{
             console.log("ERROR", e)
