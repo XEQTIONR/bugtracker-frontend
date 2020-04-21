@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import Page from '../atomic/Page'
+import IssueTypeIcon from '../atomic/IssueTypeIcon'
 import store from '../../store'
 import {useParams} from 'react-router'
 
@@ -85,26 +86,15 @@ function ProjectPage({ speed, sidebarState}){
 
   let issue_render = issues == null ? "Loading" :
                       issues.map(issue =>
-                        <li className="list-group-item d-flex justify-content-start">
+                        <li className="list-group-item d-flex justify-content-start align-items-center">
 
-
-                          
-                          {/* <span className="badge badge-danger p-0"> */}
-                            <div className="d-flex badge badge-danger justify-content-center align-items-center"
-                              style={{width : "2em", height: "2em" }}
-                            >
-                                <i className={issue.type.icon}></i>
-                            </div>
+                          <IssueTypeIcon icon={issue.type.icon} />
                             
                           <span className="ml-2">
                             <strong>{project.abbr}-{issue.serial_no}</strong> 
                           </span>
-                          {/* </span> */}
-                              
-                          
-                          
-                          <span className="ml-2">{issue.title}</span>
 
+                          <span className="ml-2">{issue.title}</span>
 
                         </li>
                       )
