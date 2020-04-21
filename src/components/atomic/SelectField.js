@@ -35,6 +35,12 @@ class SelectField extends React.Component{
     this.oB = this.oB.bind(this)
   } 
 
+  componentDidMount(){
+    this.select_option(0)
+  }
+
+  
+
   toggle_select_button(){
 
     let open = this.state.open;
