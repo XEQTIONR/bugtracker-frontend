@@ -59,7 +59,7 @@ function NewIssue(props){
 
     axios.get('http://bugtracker.local/api/issue_types')
         .then(res => {
-          setIssueTypes(res.data.map(type => {return {value : type.id, label : type.name, icon : type.icon}}))
+          setIssueTypes(res.data.map(type => {return {value : type.id, label : type.name, icon : type.icon, color : type.color}}))
         })
         .catch(error => {
           console.log(' get issue types error');
