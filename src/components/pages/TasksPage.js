@@ -30,9 +30,13 @@ function TasksPage(props){
   }
 
   useEffect(() =>{
-      getIssues();
+      if(issues === null)
+        getIssues();
+      
+      else if(issues.length && currentIssue === null)
+        setCurrentIssue(issues[0])
 
-  }, [])
+  }, [issues])
 
 
   let render = issues == null 
