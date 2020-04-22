@@ -16,7 +16,7 @@ $primary : $primary-purple;
 $theme-colors: map-merge(
   (
     "primary":    $primary,
-    "blue" : $blue,
+    "blue" : $primary-blue,
     "indigo" : $indigo
 
   ),

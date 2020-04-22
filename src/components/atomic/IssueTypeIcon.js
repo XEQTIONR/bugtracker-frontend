@@ -12,7 +12,7 @@ class IssueTypeIcon extends React.Component{
     return (
 
       <div className={"d-flex justify-content-center align-items-center badge-" + this.props.color }
-        style={{width : "16px", height: "16px", borderRadius : "3px" }}>
+        style={{width : "16px", height: "16px", borderRadius : "3px", position: "relative", top : "1px" }}>
         
         <i style={{fontSize : "9px"}} className={this.props.icon}></i>
       </div>
