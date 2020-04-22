@@ -1,9 +1,91 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import Page from '../atomic/Page'
 import Button from '../atomic/Button'
+import IssueTypeIcon from '../atomic/IssueTypeIcon'
+
+import axios from 'axios'
+
 
 function TasksPage(props){
 
+  const [issues, setIssues] = useState(null)
+  const [currentIssue, setCurrentIssue] = useState(null)
+
+  const getIssues = () => {
+    axios.get('http://bugtracker.local/api/issues')
+        .then(res => {
+          setIssues(res.data)
+        })
+        .catch(error => {
+          console.log("get issues error", error.response)
+        })
+  }
+
+
+  const showIssue = (id) => {
+
+    let is = issues.find(issue => issue.id == id)
+    console.log( is )
+    setCurrentIssue(is)
+  }
+
+  useEffect(() =>{
+      getIssues();
+
+  }, [])
+
+
+  let render = issues == null 
+              ? ''
+              : issues.map(issue => 
+                  <li key={issue.id} className="list-group-item d-flex flex-column justify-content-center"
+                    onClick={() => showIssue(issue.id)}
+                  >
+                    {/* <div className="row"> */}
+                      <div className="w-100 d-flex justify-content-start align-items-center">
+                        <IssueTypeIcon icon={issue.type.icon} color={issue.type.color} />
+                        <strong className="ml-2 mr-3">
+                          {issue.project.abbr}-{issue.serial_no}
+                        </strong>
+                      </div>
+                    {/* </div> */}
+                    {/* <div className="row"> */}
+                      <div className="w-100">
+                        {issue.title}
+                      </div>
+                    {/* </div> */}
+                  </li>)
+
+  let current_issue_render = currentIssue == null 
+                          ? ''
+                          :
+      <React.Fragment>
+        <div className="row pt-2">
+               <div className="col-10">
+                <h6 className="d-flex justify-content-start align-items-center">
+                  <IssueTypeIcon icon={currentIssue.type.icon} color={currentIssue.type.color} />
+                  <span className="ml-2"> {currentIssue.project.abbr}-{currentIssue.serial_no}</span>
+                </h6>
+               </div>
+               <div className="col-2">
+                 <button className="btn btn-sm p-0 d-block ml-auto mr-3" style={{position: "relative",top: "-4px"}}>
+                 <i className="fas fa-ellipsis-h"></i>
+                 </button>
+               </div>
+        </div>
+        <div className="row">
+          <div className="col-12">
+        <h3 className="pb-0">{currentIssue.title}</h3> 
+        <h6>Description</h6>
+
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-12">
+              {currentIssue.description}
+          </div>
+        </div>
+      </React.Fragment>
 
   return(
 
@@ -41,27 +123,8 @@ function TasksPage(props){
 
             <div className="card-body list-group table-responsive p-0" style={{maxHeight: "75vh"}}>
 
-              <ul className="list-group list-group-flush">
-              <li className="list-group-item">Cras justo odio</li>
-              <li className="list-group-item">Dapibus ac facilisis in</li>
-              <li className="list-group-item">Morbi leo risus</li>
-              <li className="list-group-item">Porta ac consectetur ac</li>
-              <li className="list-group-item">Vestibulum at eros</li>
-              <li className="list-group-item">Cras justo odio</li>
-              <li className="list-group-item">Dapibus ac facilisis in</li>
-              <li className="list-group-item">Morbi leo risus</li>
-              <li className="list-group-item">Porta ac consectetur ac</li>
-              <li className="list-group-item">Vestibulum at eros</li>
-              <li className="list-group-item">Cras justo odio</li>
-              <li className="list-group-item">Dapibus ac facilisis in</li>
-              <li className="list-group-item">Morbi leo risus</li>
-              <li className="list-group-item">Porta ac consectetur ac</li>
-              <li className="list-group-item">Vestibulum at eros</li>
-              <li className="list-group-item">Cras justo odio</li>
-              <li className="list-group-item">Dapibus ac facilisis in</li>
-              <li className="list-group-item">Morbi leo risus</li>
-              <li className="list-group-item">Porta ac consectetur ac</li>
-              <li className="list-group-item">Vestibulum at eros</li>
+              <ul className="list-group list-group-flush" style={{overflowY : "scroll"}}>
+                {render}
               </ul>
             </div>
             </div>
@@ -75,7 +138,7 @@ function TasksPage(props){
 
           </div>
           <div className="col-md-6">
-             <div className="row pt-2">
+             {/* <div className="row pt-2">
                <div className="col-10">
                 <h6><i className="fas fa-check-square"></i> MD-211</h6>
                </div>
@@ -105,8 +168,9 @@ function TasksPage(props){
 
               <p>I think that's it - we discussed this briefly on Skype so I'm not being super detailed in the ticket - let me know if I missed anything or if you have any questions. Thanks!</p>
               </div>
-            </div> 
-          </div>
+            </div> */}
+            {current_issue_render}
+          </div> 
 
           <div className="col-md-3">
             <div className="row">
