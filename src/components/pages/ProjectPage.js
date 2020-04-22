@@ -88,7 +88,7 @@ function ProjectPage({ speed, sidebarState}){
                       issues.map(issue =>
                         <li className="list-group-item d-flex justify-content-start align-items-center">
 
-                          <IssueTypeIcon icon={issue.type.icon} />
+                          <IssueTypeIcon icon={issue.type.icon} color={issue.type.color} />
                             
                           <span className="ml-2">
                             <strong>{project.abbr}-{issue.serial_no}</strong> 

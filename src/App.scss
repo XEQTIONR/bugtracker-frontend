@@ -8,10 +8,20 @@
 
 @import "startbootstrap-sb-admin-2/scss/sb-admin-2.scss";
 @import "admin-lte/dist/css/adminlte";
+
+
 $primary : $primary-purple;
-// $success : $primary-purple;
-// $font-family-base : Lato, Montserrat, sans-serif;
-// $font-weight-normal: 600;
+
+
+$theme-colors: map-merge(
+  (
+    "primary":    $primary,
+    "blue" : $blue,
+    "indigo" : $indigo
+
+  ),
+  $theme-colors
+);
 
 .list-group-item{
   border-top-width : 1px !important;
