@@ -6,6 +6,8 @@ import {useParams} from 'react-router'
 
 import {setCurrentProjectState} from '../../store/actions/index'
 
+import TaskListing from '../TaskListing'
+
 import axios from 'axios'
 
 function ProjectPage({ speed, sidebarState}){ 
@@ -16,6 +18,8 @@ function ProjectPage({ speed, sidebarState}){
   const [project, setProject] = useState(null)
 
   const [issues, setIssues] = useState(null)
+
+  const [currentIssue, setCurrentIssue] = useState(null)
 
   const [status, setStatus] = useState('init')
 
@@ -83,10 +87,16 @@ function ProjectPage({ speed, sidebarState}){
 
   }, [])
 
+  
 
-  let issue_render = issues == null ? "Loading" :
+
+  let issues_render = issues === null ? "Loading" :
                       issues.map(issue =>
-                        <li className="list-group-item d-flex justify-content-start align-items-center">
+                        <li className="list-group-item d-flex justify-content-start align-items-center"
+                            onClick={() => {
+                              setCurrentIssue(issue)
+                            }}
+                        >
 
                           <IssueTypeIcon icon={issue.type.icon} color={issue.type.color} />
                             
@@ -99,6 +109,18 @@ function ProjectPage({ speed, sidebarState}){
                         </li>
                       )
 
+  let current_issue_render = currentIssue === null 
+                            ? "" 
+                            : 
+                            <div className="card">
+                              <div className="card-body  pt-2">
+                                <TaskListing
+                                    icon={currentIssue.type.icon} color={currentIssue.type.color}
+                                    proj_abbr={project.abbr} serial_no={currentIssue.serial_no}
+                                    title={currentIssue.title} description={currentIssue.description}
+                                />
+                              </div>
+                            </div>
 
   let content = (status === 'init') ? '' :
         <React.Fragment>
@@ -114,18 +136,21 @@ function ProjectPage({ speed, sidebarState}){
             </div>
           
           </div>
-          <div className = "row mx-2 justify-content-center">
-            <div className="col-12">
+          <div className = "row mx-2">
+            <div className="col-md-6">
               <div className="card">
                 <div className="card-header">
                   Tasks
                 </div>
                 <div className="card-body p-0">
                   <ul className="list-group list-group-flush">
-                      {issue_render}
+                      {issues_render}
                   </ul>
                 </div>
               </div>
+            </div>
+            <div className="col-md-6">
+                  {current_issue_render}
             </div>
           </div>
         </React.Fragment>
